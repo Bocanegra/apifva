@@ -1,0 +1,162 @@
+<%@ page import="feriantes_grails.Barrio" %>
+<!doctype html>
+<html>
+    <head>
+        <meta name="layout" content="main"/>
+        <title>Asociación de Feriantes de Valladolid</title>
+
+        <asset:link rel="icon" href="favicon.ico" type="image/x-ico" />
+        <g:javascript>
+            function appendSocio() {
+                text = $('#socio').val();
+                $('#socios').val($('#socios').val()+text+"\n");
+                updateDoc();
+            }
+            function updateDoc() {
+                text = "\nRELACIÓN DE FERIANTES QUE MONTARÁN EN \"";
+                text += $('#lugar').val()+"\":\n\n";
+                text += "RELACIÓN DE SOCIOS:\n";
+                text += $('#socios').val()+"\n";
+                text += "RELACIÓN DE NO SOCIOS:\n";
+                text += $('#nosocios').val()+"\n\n";
+                $('#notas').val(text);
+            }
+            function updateImg(evt) {
+                var tgt = evt.target || window.event.srcElement;
+                var files = tgt.files;
+                // FileReader support
+                if (FileReader && files && files.length) {
+                    var fr = new FileReader();
+                    fr.onload = function () {
+                        document.getElementById('plano_img').src = fr.result;
+                    }
+                    fr.readAsDataURL(files[0]);
+                }
+            }
+        </g:javascript>
+    </head>
+
+    <body>
+        <content tag="nav">
+            <g:render template="/menu"/>
+        </content>
+
+        <div id="content" role="main">
+
+            <section class="row col-1">
+                <h1>Generación de documentación para las Ferias</h1>
+
+                <sec:ifAnyGranted roles='ROLE_ADMIN'>
+                    <g:link action="list">Listado de Barrios</g:link>
+                </sec:ifAnyGranted>
+
+                <br/><br/>
+                <g:if test="${flash.message}">
+                    <div class="message" role="status">${flash.message}</div>
+                </g:if>
+            </section>
+
+                <div id="left_col">
+                    <table>
+                        <tr>
+                            <g:form action="index">
+                                <td style="width:25%">
+                                    <span>Cargar datos de</span>
+                                </td>
+                                <td style="width:60%">
+                                    <g:select id="barrio" name="barrio" from="${Barrio.list()}" optionKey="id"/>
+                                </td>
+                                <td style="width:15%">
+                                    <g:submitButton name="cargar" value="Cargar"/>
+                                </td>
+                            </g:form>
+                        </tr>
+
+                        <tr>
+                            <g:form action="nuevo_barrio">
+                                <td>
+                                    <span>Nuevo Barrio</span>
+                                </td>
+                                <td>
+                                    <g:field name="nuevo_lugar" type="text" size="30"/>
+                                </td>
+                                <td>
+                                    <g:submitButton name="n_lugar_button" value="Crear nuevo"/>
+                                </td>
+                            </g:form>
+                        </tr>
+
+                        <g:uploadForm action="generar_fichero">
+                            <tr>
+                                <td>
+                                    <span>Lugar</span>
+                                </td>
+                                <td>
+                                    <g:select name="lugar" from="${lugares}" onchange="updateDoc()"/><br/>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <span>Socios</span>
+                                </td>
+                                <td>
+                                    <g:select id="socio" name="socio" from="${ferianteList}" value="${nombre}"/>
+                                </td>
+                                <td>
+                                    <g:field type="button" name="add_socio" value="Añadir" onclick="appendSocio()"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    %{--<g:select name="lista_socios" from="[]" noSelection="['':'-Lista de socios para la Feria-']"--}%
+                                              %{--multiple="true" size="7"/>--}%
+                                    <g:textArea name="socios" value="${sociosTxt}" rows="5"
+                                                style="background-image: none" onchange="updateDoc()"/>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="3">
+                                    <span>No Socios</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <g:textArea name="nosocios" value="${nosociosTxt}" rows="5"
+                                                style="background-image: none" onchange="updateDoc()"/>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <span>Plano de la Feria</span>
+                                </td>
+                                <td>
+                                    <g:field name="plano" type="file" onchange="updateImg(this)"/>
+                                    <br/>
+                                    <img id="plano_img" src="" height="200">
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td/>
+                                <td/>
+                                <td><g:field type="submit" name="actualizar" value="Generar fichero y guardar"/></td>
+                            </tr>
+
+                        </g:uploadForm>
+
+                    </table>
+                </div>
+
+                <div id="right_col">
+                    <h2>Fichero a generar</h2>
+                    <g:textArea name="notas" value="" rows="25" readonly="true"/>
+                    <br/><br/>
+                </div>
+
+        </div>
+
+    </body>
+</html>

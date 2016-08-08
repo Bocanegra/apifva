@@ -63,18 +63,65 @@
                 <g:each in="${documentacionList}" status="i" var="docInstance">
                     <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                         <td width="7%">${fieldValue(bean:docInstance, field:'feriante')}</td>
-                        <td width="7%"><g:checkBox name="pliego" value="${docInstance.pliego}" onclick="to_check(${docInstance.id},'pliego')"/></td>
-                        <td width="7%"><g:checkBox name="hacienda" value="${docInstance.hacienda}" onclick="to_check(${docInstance.id},'hacienda')"/></td>
-                        <td width="7%"><g:checkBox name="autonomo" value="${docInstance.autonomo}" onclick="to_check(${docInstance.id},'autonomo')"/></td>
-                        <td width="7%"><g:checkBox name="seguro" value="${docInstance.seguro}" onclick="to_check(${docInstance.id},'seguro')"/></td>
-                        <td width="7%"><g:checkBox name="poliza" value="${docInstance.poliza}" onclick="to_check(${docInstance.id},'poliza')"/></td>
-                        <td width="7%"><g:checkBox name="verificacion" value="${docInstance.verificacion}" onclick="to_check(${docInstance.id},'verificacion')"/></td>
-                        <td width="7%"><g:checkBox name="extintores" value="${docInstance.extintores}" onclick="to_check(${docInstance.id},'extintores')"/></td>
-                        <td width="7%"><g:checkBox name="alimentos" value="${docInstance.alimentos}" onclick="to_check(${docInstance.id},'alimentos')"/></td>
-                        <td width="7%"><g:checkBox name="boletin" value="${docInstance.boletin}" onclick="to_check(${docInstance.id},'boletin')"/></td>
-                        <td width="7%"><g:checkBox name="fotos" value="${docInstance.fotos}" onclick="to_check(${docInstance.id},'fotos')"/></td>
-                        <td width="7%"><g:checkBox name="dni" value="${docInstance.dni}" onclick="to_check(${docInstance.id},'dni')"/></td>
-                        <td width="7%"><g:checkBox name="solicitud" value="${docInstance.solicitud}" onclick="to_check(${docInstance.id},'solicitud')"/></td>
+                        <td width="7%">
+                            <g:checkBox name="pliego" value="${docInstance.pliego}" onclick="to_check(${docInstance.id},'pliego')"/>
+                            <br/><g:field name="f_pliego" type="date" value="${docInstance.f_pliego}" size="6"/>
+                        </td>
+
+                        <td width="7%">
+                            <g:checkBox name="hacienda" value="${docInstance.hacienda}" onclick="to_check(${docInstance.id},'hacienda')"/>
+                            <br/><g:field name="f_hacienda" type="date" value="${docInstance.f_hacienda}" size="6"/>
+                        </td>
+
+                        <td width="7%">
+                            <g:checkBox name="autonomo" value="${docInstance.autonomo}" onclick="to_check(${docInstance.id},'autonomo')"/>
+                            <br/><g:field name="f_autonomo" type="date" value="${docInstance.f_autonomo}" size="6"/>
+                        </td>
+
+                        <td width="7%">
+                            <g:checkBox name="seguro" value="${docInstance.seguro}" onclick="to_check(${docInstance.id},'seguro')"/>
+                            <br/><g:field name="f_seguro" type="date" value="${docInstance.f_seguro}" size="6"/>
+                        </td>
+
+                        <td width="7%">
+                            <g:checkBox name="poliza" value="${docInstance.poliza}" onclick="to_check(${docInstance.id},'poliza')"/>
+                            <br/><g:field name="f_poliza" type="date" value="${docInstance.f_poliza}" size="6"/>
+                        </td>
+
+                        <td width="7%">
+                            <g:checkBox name="verificacion" value="${docInstance.verificacion}" onclick="to_check(${docInstance.id},'verificacion')"/>
+                            <br/><g:field name="f_verificacion" type="date" value="${docInstance.f_verificacion}" size="6"/>
+                        </td>
+
+                        <td width="7%">
+                            <g:checkBox name="extintores" value="${docInstance.extintores}" onclick="to_check(${docInstance.id},'extintores')"/>
+                            <br/><g:field name="f_extintores" type="date" value="${docInstance.f_extintores}" size="6"/>
+                        </td>
+
+                        <td width="7%">
+                            <g:checkBox name="alimentos" value="${docInstance.alimentos}" onclick="to_check(${docInstance.id},'alimentos')"/>
+                            <br/><g:field name="f_alimentos" type="date" value="${docInstance.f_alimentos}" size="6"/>
+                        </td>
+
+                        <td width="7%">
+                            <g:checkBox name="boletin" value="${docInstance.boletin}" onclick="to_check(${docInstance.id},'boletin')"/>
+                            <br/><g:field name="f_boletin" type="date" value="${docInstance.f_boletin}" size="6"/>
+                        </td>
+
+                        <td width="7%">
+                            <g:checkBox name="fotos" value="${docInstance.fotos}" onclick="to_check(${docInstance.id},'fotos')"/>
+                            <br/><g:field name="f_fotos" type="date" value="${docInstance.f_fotos}" size="6"/>
+                        </td>
+
+                        <td width="7%">
+                            <g:checkBox name="dni" value="${docInstance.dni}" onclick="to_check(${docInstance.id},'dni')"/>
+                            <br/><g:field name="f_dni" type="date" value="${docInstance.f_dni}" size="6"/>
+                        </td>
+
+                        <td width="7%">
+                            <g:checkBox name="solicitud" value="${docInstance.solicitud}" onclick="to_check(${docInstance.id},'solicitud')"/>
+                            <br/><g:field name="f_solicitud" type="date" value="${docInstance.f_solicitud}" size="6"/>
+                        </td>
                     </tr>
                 </g:each>
                 </tbody>

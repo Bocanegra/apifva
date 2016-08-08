@@ -36,6 +36,8 @@ class ValidacionController {
             Feriante.findAllByAnyo(anyoActual).each { feriante ->
                 def documentacion = new Documentacion(anyo: anyoActual, feriante: feriante)
                 documentacion.save(flush: true)
+                feriante.save(flush:true)
+                log.error("Creada: ${documentacion}")
             }
         }
         redirect(view: "index")

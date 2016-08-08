@@ -37,6 +37,7 @@ Informes:
 
 Despliegue:
 [ ] Heroku: https://objectpartners.com/2015/04/23/deploying-grails-3-applications-and-other-fat-jars-to-heroku/
+[ ] AWS Beanstalk: https://medium.com/@benorama/how-to-deploy-grails-3-app-to-aws-elastic-beanstalk-with-gradle-and-travis-318d084c0f7d#.sxjqazw65
 
 Bugs/mejoras:
 [ ] El segundo y siguientes informes no mantienen el formato (INFORMATIVO)

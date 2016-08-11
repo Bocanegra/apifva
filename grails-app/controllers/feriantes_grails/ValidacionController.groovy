@@ -72,6 +72,21 @@ class ValidacionController {
         render ""
     }
 
+    @Transactional
+    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE', 'ROLE_GESTORIA'])
+    def update_fechas() {
+        log.error(params)
+        // Llamada remota AJAX
+        def doc = Documentacion.get(params.id)
+        def campo = params.campo
+        def fecha = params.fecha
+        if (doc && campo && fecha) {
+            doc[campo] = new Date(fecha)
+            doc.save()
+        }
+        render ""
+    }
+
     private static def obtenerDocumentaciones() {
         // Comprobar si hay alguna de este año
         def year = Calendar.instance.get(Calendar.YEAR).toString()

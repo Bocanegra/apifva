@@ -34,6 +34,7 @@ Informes:
 [ ] Ajustar tablas al 100% del ancho
 [ ] Fechas en validaciones
 [x] Añadir IBAN al modelo de Feriantes
+[ ] Informe nuevo con parcela-nombre-iban
 
 Despliegue:
 [ ] Heroku: https://objectpartners.com/2015/04/23/deploying-grails-3-applications-and-other-fat-jars-to-heroku/
@@ -44,7 +45,6 @@ Bugs/mejoras:
 [ ] Probar el borrado en cascada de Documentaciones al borrar Feriantes
 [ ] Guardar planos de barrios en base de datos
 [ ] Creación/modificación usuarios para perfil Admin
-
 
 ------------------------------------------------------------------------------------------------------------------------
 NOTAS:
@@ -138,4 +138,38 @@ DESPLIEGUE EN HEROKU:
     $ heroku create
     $ heroku addons:create heroku-postgresql
     $ git push heroku master
+
+DESPLIEGUE EN AMAZON AWS:
+
+- Hay un bug en tomcat 8.0.35, hay que crear un fichero (vacío) en:
+    WEB-INF/classes/META-INF/MANIFEST.MF
+  En Grails 3, se crea dentro de src/webapp/WEB-INF.....
+
+- También hay que deshabilitar el tomcat embebido que viene de serie con Grails, cambiar en build.gradle:
+     compile "org.springframework.boot:spring-boot-starter-tomcat" por
+     provided "org.springframework.boot:spring-boot-starter-tomcat"
+
+- Crear la BD (RDS) en Amazon, y coger datos, y en el fichero application.groovy (conf):
+    environments {
+        production {
+            dataSource {
+                dbCreate = "update"
+                driverClassName = "com.mysql.jdbc.Driver"
+                dialect = org.hibernate.dialect.MySQL5InnoDBDialect
+                url = "jdbc:mysql://aa163hwh1c9li6y.cvef7hsbwcdb.us-west-2.rds.amazonaws.com:3306/ebdb"
+                username = "feriantes"
+                password = "feriantes"
+                pooled = true
+                properties {
+                    validationQuery = "SELECT 1"
+                    testOnBorrow = true
+                    testOnReturn = true
+                    testWhileIdle = true
+                    timeBetweenEvictionRunsMillis = 1800000
+                    numTestsPerEvictionRun = 3
+                    minEvictableIdleTimeMillis = 1800000
+                }
+            }
+        }
+    }
 

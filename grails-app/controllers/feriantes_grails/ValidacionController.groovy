@@ -49,9 +49,11 @@ class ValidacionController {
         accesoService.crearAcceso(Tipo.TipoBorrar, Recurso.RecursoValidacion, springSecurityService.currentUser, params.year)
 
         // Comprobar si hay alguna de este año
-        Documentacion.findAllByAnyo(params.year).each {
+        Documentacion.findAllByAnyo(params.year).each { doc ->
             try {
-                it.delete(flush: true)
+                doc.feriante.documentacion = null
+                doc.feriante.save()
+                doc.delete(flush:true)
             } catch (DataIntegrityViolationException e) {
                 log.error("No se ha podido eliminar ${it}")
             }
@@ -63,7 +65,8 @@ class ValidacionController {
     @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE', 'ROLE_GESTORIA'])
     def check() {
         // Llamada remota AJAX
-        def doc = Documentacion.get(params.id)
+        Documentacion doc = Documentacion.get(params.id)
+        doc.f_pliego.format("dd/mm/YYYY")
         def campo = params.campo
         if (doc && campo) {
             doc[campo] = !doc[campo]
@@ -79,9 +82,9 @@ class ValidacionController {
         // Llamada remota AJAX
         def doc = Documentacion.get(params.id)
         def campo = params.campo
-        def fecha = params.fecha
+        def fecha = params.date("fecha", "dd-MM-yy")
         if (doc && campo && fecha) {
-            doc[campo] = new Date(fecha)
+            doc[campo] = fecha
             doc.save()
         }
         render ""

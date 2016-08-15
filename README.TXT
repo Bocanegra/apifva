@@ -32,17 +32,19 @@ Informes:
 [x] Poder subir imagen con plano de barrios, imprimible en formulario
 [x] Creación de tabla Logs, mostrarlos y filtrarlos
 [ ] Ajustar tablas al 100% del ancho
-[ ] Fechas en validaciones
+[x] Fechas en validaciones
 [x] Añadir IBAN al modelo de Feriantes
 [ ] Informe nuevo con parcela-nombre-iban
 
 Despliegue:
 [ ] Heroku: https://objectpartners.com/2015/04/23/deploying-grails-3-applications-and-other-fat-jars-to-heroku/
 [ ] AWS Beanstalk: https://medium.com/@benorama/how-to-deploy-grails-3-app-to-aws-elastic-beanstalk-with-gradle-and-travis-318d084c0f7d#.sxjqazw65
+[ ] http://www.databaseapplications.com.au/elastic_beanstalk.jsp#.V62cbGWlUWo
+[x] AMAZON EC2: https://aws.amazon.com/es/getting-started/tutorials/launch-a-virtual-machine
 
 Bugs/mejoras:
 [ ] El segundo y siguientes informes no mantienen el formato (INFORMATIVO)
-[ ] Probar el borrado en cascada de Documentaciones al borrar Feriantes
+[x] Probar el borrado en cascada de Documentaciones al borrar Feriantes
 [ ] Guardar planos de barrios en base de datos
 [ ] Creación/modificación usuarios para perfil Admin
 

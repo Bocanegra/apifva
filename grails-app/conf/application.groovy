@@ -2,12 +2,21 @@
 //    production {
 //        dataSource {
 //            dbCreate = "update"
-//            driverClassName = "org.postgresql.Driver"
-//            dialect = org.hibernate.dialect.PostgreSQLDialect
-//            uri = new URI(System.env.DATABASE_URL?:"postgres://localhost:5432/test")
-//            url = "jdbc:postgresql://" + uri.host + ":" + uri.port + uri.path + "?sslmode=require"
-//            username = uri.userInfo.split(":")[0]
-//            password = uri.userInfo.split(":")[1]
+//            driverClassName = "com.mysql.jdbc.Driver"
+//            dialect = org.hibernate.dialect.MySQL5InnoDBDialect
+//            url = "jdbc:mysql://aa163hwh1c9li6y.cvef7hsbwcdb.us-west-2.rds.amazonaws.com:3306/ebdb"
+//            username = "feriantes"
+//            password = "feriantes"
+//       	    pooled = true
+//		properties {
+//		validationQuery = "SELECT 1"
+//		testOnBorrow = true
+//		testOnReturn = true
+//		testWhileIdle = true
+//		timeBetweenEvictionRunsMillis = 1800000
+//		numTestsPerEvictionRun = 3
+//		minEvictableIdleTimeMillis = 1800000
+//	    }
 //        }
 //    }
 //}

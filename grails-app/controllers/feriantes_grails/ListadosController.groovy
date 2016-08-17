@@ -72,13 +72,11 @@ class ListadosController {
         }
         def year = params.anyo ?: Calendar.instance.get(Calendar.YEAR).toString()
         def campos_on = params.findAll { it.value == "on" }
-        log.error(campos_on.keySet().sort())
         pdfRenderingService.render([controller: 'listados',
                                     template: 'personalizado',
                                     model:[ferianteList: feriantesAnuales(year),
                                            fieldList: campos_on.keySet()]
         ], response)
-        render ""
     }
 
     public static def feriantesAnuales(year) {

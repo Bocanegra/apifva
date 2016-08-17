@@ -5,9 +5,9 @@ import grails.plugin.springsecurity.annotation.Secured
 class AccesoController {
 
     @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE'])
-    def index() {
+    def index(Integer max) {
 //        log.error("Index: ${params}")
-        params.max = Math.min(params.max ?: 50, 100)
+        params.max = Math.min(max ?: 50, 100)
         if (params.result) {
             respond params.result, model:[accesoCount: params.result.size()]
         } else {

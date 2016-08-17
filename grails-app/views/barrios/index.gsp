@@ -41,23 +41,21 @@
             <g:render template="/menu"/>
         </content>
 
-        <div id="content" role="main">
-
-            <section class="row col-1">
+        <div id="content" class="content scaffold-list" role="main">
+            <section class="row colset-2-its">
                 <h1>Generación de documentación para las Ferias</h1>
 
                 <sec:ifAnyGranted roles='ROLE_ADMIN'>
                     <g:link action="list">Listado de Barrios</g:link>
                 </sec:ifAnyGranted>
 
-                <br/><br/>
                 <g:if test="${flash.message}">
                     <div class="message" role="status">${flash.message}</div>
                 </g:if>
             </section>
 
-                <div id="left_col">
-                    <table>
+                <div id="barrios_left_col">
+                    <table style="border-top-width:0">
                         <tr>
                             <g:form action="index">
                                 <td style="width:25%">
@@ -109,10 +107,8 @@
                             </tr>
                             <tr>
                                 <td colspan="3">
-                                    %{--<g:select name="lista_socios" from="[]" noSelection="['':'-Lista de socios para la Feria-']"--}%
-                                              %{--multiple="true" size="7"/>--}%
                                     <g:textArea name="socios" value="${sociosTxt}" rows="5"
-                                                style="background-image: none" onchange="updateDoc()"/>
+                                                class="barrios_text_area" onchange="updateDoc()"/>
                                 </td>
                             </tr>
 
@@ -124,7 +120,7 @@
                             <tr>
                                 <td colspan="3">
                                     <g:textArea name="nosocios" value="${nosociosTxt}" rows="5"
-                                                style="background-image: none" onchange="updateDoc()"/>
+                                                class="barrios_text_area" onchange="updateDoc()"/>
                                 </td>
                             </tr>
 
@@ -150,9 +146,9 @@
                     </table>
                 </div>
 
-                <div id="right_col">
+                <div id="barrios_right_col">
                     <h2>Fichero a generar</h2>
-                    <g:textArea name="notas" value="" rows="25" readonly="true"/>
+                    <g:textArea name="notas" value="" rows="25" readonly="true" class="barrios_text_area_notas"/>
                     <br/><br/>
                 </div>
 

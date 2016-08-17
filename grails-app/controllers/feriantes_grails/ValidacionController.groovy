@@ -65,8 +65,7 @@ class ValidacionController {
     @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE', 'ROLE_GESTORIA'])
     def check() {
         // Llamada remota AJAX
-        Documentacion doc = Documentacion.get(params.id)
-        doc.f_pliego.format("dd/mm/YYYY")
+        def doc = Documentacion.get(params.id)
         def campo = params.campo
         if (doc && campo) {
             doc[campo] = !doc[campo]

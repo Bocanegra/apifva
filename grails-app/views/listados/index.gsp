@@ -1,4 +1,4 @@
-<%@ page import="grails.util.Environment" %>
+<%@ page import="feriantes_grails.Feriante; grails.util.Environment" %>
 <!doctype html>
 <html>
     <head>
@@ -34,6 +34,20 @@
                     <li class="controller buttons">
                         <g:link action="ayuntamiento">Listado para el Ayuntamiento</g:link>
                         <g:link action="ayuntamiento" params="[download: true]" class="save">Descargar</g:link>
+                    </li>
+                    <li class="controller buttons">
+                        <g:link action="pago">Listado número cuenta (IBAN)</g:link>
+                        <g:link action="pago" params="[download: true]" class="save">Descargar</g:link>
+                    </li>
+                    <li class="controller buttons">
+                        <g:form id="form_id" action="personalizado">
+                            <g:field name="submit" type="submit" value="Personalizado"/>
+                            <g:field name="download" type="submit" class="save" value="Descargar"/>
+                            <br/>
+                            <g:each in="${properties}" var="prop">
+                                <g:checkBox name="${prop}"/><span>${prop}</span><br/>
+                            </g:each>
+                        </g:form>
                     </li>
                 </ul>
             </section>

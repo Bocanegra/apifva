@@ -34,7 +34,7 @@ Informes:
 [ ] Ajustar tablas al 100% del ancho
 [x] Fechas en validaciones
 [x] Añadir IBAN al modelo de Feriantes
-[ ] Informe nuevo con parcela-nombre-iban
+[x] Listado nuevo con parcela-nombre-iban
 
 Despliegue:
 [ ] Heroku: https://objectpartners.com/2015/04/23/deploying-grails-3-applications-and-other-fat-jars-to-heroku/

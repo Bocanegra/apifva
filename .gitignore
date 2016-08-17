@@ -1,6 +1,7 @@
 *.iws
 *Db.properties
 *Db.script
+*.db
 .settings
 .classpath
 .project

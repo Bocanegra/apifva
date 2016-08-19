@@ -22,6 +22,13 @@
     </ul>
 </li>
 
+<!-- Menu de Usuarios -->
+<sec:ifAnyGranted roles='ROLE_ADMIN,ROLE_PRESIDENTE'>
+    <li class="dropdown">
+        <a href="${createLink(controller: 'user')}">Usuarios</a>
+    </li>
+</sec:ifAnyGranted>
+
 <!-- Menu del Sistema -->
 <li class="dropdown">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sistema <span class="caret"></span></a>

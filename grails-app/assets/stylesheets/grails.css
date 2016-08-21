@@ -44,7 +44,7 @@ pre {
 
 }
 .navbar-default, .navbar-static-top {
-    background-color: #4D8618;
+    background-color: #286090;
     border: 0px;
 }
 a.navbar-brand {
@@ -59,7 +59,7 @@ a.navbar-brand {
     color: white !important;
 }
 .navbar-nav>li>a:hover {
-    background-color: #db4800 !important;
+    background-color: #8c8c8c !important;
     color: white !important;
 }
 .navbar-nav>li>a {
@@ -792,7 +792,7 @@ ul.nav-sidebar li a {
 
 ul.nav-sidebar li.active a:hover, ul.nav-sidebar li a:hover {
     color: white;
-    background-color: #db4800;
+    background-color: #8c8c8c;
 }
 
 ul.nav-sidebar li.active a {

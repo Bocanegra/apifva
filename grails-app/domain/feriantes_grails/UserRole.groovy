@@ -28,7 +28,7 @@ class UserRole implements Serializable {
 		builder.toHashCode()
 	}
 
-	static UserRole get(long userId, long roleId) {
+    static UserRole get(long userId, long roleId) {
 		criteriaFor(userId, roleId).get()
 	}
 

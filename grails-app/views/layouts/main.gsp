@@ -26,7 +26,7 @@
                     </button>
                     <a class="navbar-brand" href="/#">
                         <i class="fa grails-icon">
-                            <asset:image src="caballito_low.png"/>
+                            <asset:image src="logo.jpg"/>
                         </i> Asociación de Industriales Feriantes
                     </a>
                 </div>

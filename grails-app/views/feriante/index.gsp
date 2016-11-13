@@ -34,10 +34,15 @@
                             <ul class="buttons">
                                 <li class="controller"><g:link controller="barrios" action="index">Informes</g:link></li>
                             </ul>
-                            <h2>Accesos</h2>
-                            <ul class="buttons">
-                                <li class="controller"><g:link controller="acceso" action="index">Consulta de Accesos</g:link></li>
-                            </ul>
+
+                                <h2>Accesos</h2>
+                                <ul class="buttons">
+                                    <li class="controller"><g:link controller="acceso" action="index">Consulta de Accesos</g:link></li>
+                                    <!-- Base de datos solo para Admin -->
+                                    <sec:ifAnyGranted roles='ROLE_ADMIN'>
+                                    <li class="controller"><g:link url="/dbconsole">Base de datos</g:link></li>
+                                    </sec:ifAnyGranted>
+                                </ul>
 
                         </g:if>
                         <g:else>

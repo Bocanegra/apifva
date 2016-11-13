@@ -28,6 +28,7 @@ grails.plugin.springsecurity.authority.className = 'feriantes_grails.Role'
 grails.plugin.springsecurity.logout.postOnly = false
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	[pattern: '/',               access: ['permitAll']],
+	[pattern: '/dbconsole/**',   access: ['permitAll']],
 	[pattern: '/error',          access: ['permitAll']],
 	[pattern: '/index',          access: ['permitAll']],
 	[pattern: '/list.gsp',       access: ['permitAll']],

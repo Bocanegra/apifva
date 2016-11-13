@@ -256,7 +256,7 @@ class FerianteController {
             }
         }
 
-        redirect(action:'list')
+        redirect(action:'list', params:[anyo:"0"])
     }
 
     public static def preparaCelda(Cell celda, tipo) {

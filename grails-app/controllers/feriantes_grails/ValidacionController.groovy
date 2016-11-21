@@ -44,7 +44,7 @@ class ValidacionController {
     }
 
     @Transactional
-    @Secured(['ROLE_ADMIN'])
+    @Secured(['ROLE_ADMIN','ROLE_SECRETARIO', 'ROLE_PRESIDENTE'])
     def delete() {
         accesoService.crearAcceso(Tipo.TipoBorrar, Recurso.RecursoValidacion, springSecurityService.currentUser, params.year)
 
@@ -59,6 +59,30 @@ class ValidacionController {
             }
         }
         redirect(view: "index")
+    }
+
+    @Transactional
+    @Secured(['ROLE_ADMIN','ROLE_SECRETARIO', 'ROLE_PRESIDENTE', 'ROLE_GESTORIA'])
+    def filter() {
+        accesoService.crearAcceso(Tipo.TipoAcceder, Recurso.RecursoValidacion, springSecurityService.currentUser, "Filtrado")
+
+        // Comprobar si hay alguna de este año
+        def now = new Date()
+        def filtered = obtenerDocumentaciones().grep { doc ->
+            (doc.f_pliego && doc.f_pliego < now) ||
+            (doc.f_hacienda && doc.f_hacienda < now) ||
+            (doc.f_autonomo && doc.f_autonomo < now) ||
+            (doc.f_seguro && doc.f_seguro < now) ||
+            (doc.f_poliza && doc.f_poliza < now) ||
+            (doc.f_verificacion && doc.f_verificacion < now) ||
+            (doc.f_extintores && doc.f_extintores < now) ||
+            (doc.f_alimentos && doc.f_alimentos < now) ||
+            (doc.f_boletin && doc.f_boletin < now) ||
+            (doc.f_fotos && doc.f_fotos < now) ||
+            (doc.f_dni && doc.f_dni < now) ||
+            (doc.f_solicitud && doc.f_solicitud < now)
+        }
+        render(view: "index", model: ["documentacionList": filtered])
     }
 
     @Transactional
@@ -77,7 +101,6 @@ class ValidacionController {
     @Transactional
     @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE', 'ROLE_GESTORIA'])
     def update_fechas() {
-        log.error(params)
         // Llamada remota AJAX
         def doc = Documentacion.get(params.id)
         def campo = params.campo
@@ -92,7 +115,7 @@ class ValidacionController {
     private static def obtenerDocumentaciones() {
         // Comprobar si hay alguna de este año
         def year = Calendar.instance.get(Calendar.YEAR).toString()
-        return Documentacion.findAllByAnyo(year)
+        return Documentacion.findAllByAnyo(year, [sort: 'feriante.parcela'])
     }
 
 }

@@ -18,6 +18,9 @@ class Feriante {
     Integer superficie2 = 0
     Integer precio2 = 0
     String dni
+    String email
+    String IBAN
+    // Pagos
     Integer gastos
     Integer luzAgua
     Integer vivienda
@@ -26,11 +29,9 @@ class Feriante {
     Integer sancion
     String motivoSancion
     Integer fianza
-    String email
-    String IBAN
+    Integer pagado
 
     Documentacion documentacion
-//    static hasOne = [documentacion: Documentacion]
 
     Date dateCreated
     Date lastUpdated
@@ -58,6 +59,7 @@ class Feriante {
         sancion (nullable:true)
         motivoSancion (nullable:true)
         fianza (nullable:true)
+        pagado (nullable:true)
         email (email:true, nullable:true)
         IBAN (nullable:true)
         documentacion (nullable:true)
@@ -81,6 +83,10 @@ class Feriante {
 
     int getPago2() {
         total - pago1
+    }
+
+    int getPendiente() {
+        total - (pagado ? pagado : 0)
     }
 
     @Override

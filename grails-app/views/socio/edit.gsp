@@ -17,19 +17,34 @@
         <div id="edit-socio" class="content scaffold-edit" role="main">
             <h1><g:message code="default.edit.label" args="[entityName]" /></h1>
             <g:if test="${flash.message}">
-            <div class="message" role="status">${flash.message}</div>
+                <div class="message" role="status">${flash.message}</div>
             </g:if>
             <g:hasErrors bean="${this.socio}">
-            <ul class="errors" role="alert">
-                <g:eachError bean="${this.socio}" var="error">
-                <li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
-                </g:eachError>
-            </ul>
+                <ul class="errors" role="alert">
+                    <g:eachError bean="${this.socio}" var="error">
+                    <li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
+                    </g:eachError>
+                </ul>
             </g:hasErrors>
             <g:form resource="${this.socio}" method="PUT">
-                <g:hiddenField name="version" value="${this.socio?.version}" />
+                <g:hiddenField name="version" value="${this.socio?.version}"/>
                 <fieldset class="form">
-                    <f:all bean="socio"/>
+                    <f:field bean="socio" property="numeroSocio"/>
+                    <f:field bean="socio" property="nombre"/>
+                    <f:field bean="socio" property="direccion"/>
+                    <f:field bean="socio" property="codigoPostal"/>
+                    <f:field bean="socio" property="poblacion"/>
+                    <f:field bean="socio" property="provincia"/>
+                    <f:field bean="socio" property="nombre1"/>
+                    <f:field bean="socio" property="movil1"/>
+                    <f:field bean="socio" property="nombre2"/>
+                    <f:field bean="socio" property="movil2"/>
+                    <f:field bean="socio" property="nombreFijo"/>
+                    <f:field bean="socio" property="telefonoFijo"/>
+                    <f:field bean="socio" property="email"/>
+                    <f:field bean="socio" property="negocios">
+                        <g:textArea name="negocios" cols="50" rows="5" value="${this.socio?.negocios}"/>
+                    </f:field>
                 </fieldset>
                 <fieldset class="buttons">
                     <input class="save" type="submit" value="${message(code: 'default.button.update.label', default: 'Update')}" />

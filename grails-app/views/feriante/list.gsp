@@ -21,7 +21,7 @@
                         <g:field name="send" type="submit" value="Filtrar" class="buttons"/>
                     </g:form>
                 </li>
-                <sec:ifAnyGranted roles='ROLE_ADMIN'>
+                <sec:ifAnyGranted roles='ROLE_ADMIN,ROLE_SECRETARIO,ROLE_PRESIDENTE'>
                     <li class="buttons delete">
                         <g:form action="deleteFeriantes">
                             Eliminar todos los feriantes para el año:

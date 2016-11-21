@@ -9,6 +9,13 @@
             function checkAll() {
                 $("input[type='checkbox']").prop("checked", true);
             }
+            function showPagoOpts() {
+                if ($('#tipo_informe option:selected').index() == 0) {
+                    $('#info_doc_pago').show();
+                } else {
+                    $('#info_doc_pago').hide();
+                }
+            }
         </g:javascript>
     </head>
 
@@ -32,10 +39,36 @@
                 <g:form controller="informes">
                     <div align="center">
                         <g:select id="tipo_informe" name="tipo" from="${TipoInformes.values()}" value="${TipoInformes}"
-                                  optionKey="key"/>
+                                  optionKey="key" onchange="showPagoOpts()"/>
                         <g:actionSubmit action="generar" value="Generar"/>
                     </div>
                     <br/>
+
+                    <table id="info_doc_pago">
+                        <tr>
+                            <td colspan="2">Información sólo para el Documento de pago</td>
+                        </tr>
+                        <tr>
+                            <td width="30%">Cuenta corriente (IBAN) de la Asociación:</td>
+                            <td><g:field type="text" name="iban" value="ES84-0182-4641-1700-0017-0375 BBVA" size="60"/></td>
+                        </tr>
+                        <tr>
+                            <td>Fecha límite <b>Primer pago</b>:</td>
+                            <td><g:field type="text" name="fecha_primer_pago"/></td>
+                        </tr>
+                        <tr>
+                            <td>Fecha límite <b>Segundo pago</b>:</td>
+                            <td><g:field type="text" name="fecha_segundo_pago"/></td>
+                        </tr>
+                        <tr>
+                            <td>Fecha límite <b>Fianza</b>:</td>
+                            <td><g:field type="text" name="fecha_fianza"/></td>
+                        </tr>
+                        <tr>
+                            <td>Fecha límite <b>Presentación de documentación</b>:</td>
+                            <td><g:field type="text" name="fecha_documentacion"/></td>
+                        </tr>
+                    </table>
 
                     <table>
                         <thead>

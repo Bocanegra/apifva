@@ -23,15 +23,16 @@ class BarriosController {
 
     @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE'])
     def index() {
+        def listaSocios = Socio.list(sort:"numeroSocio", order:"asc")
         if (params.barrio) {
             def barrio = Barrio.get(params.barrio)
-            render(view: "index", model:[ferianteList: feriantesAnuales(),
+            render(view: "index", model:[sociosList: listaSocios,
                                          lugares: obtenerDistintosLugares(),
                                          sociosTxt: barrio.socios,
                                          nosociosTxt: barrio.nosocios])
 
         } else {
-            render(view: "index", model:[ferianteList: feriantesAnuales(),
+            render(view: "index", model:[sociosList: listaSocios,
                                          lugares: obtenerDistintosLugares()])
         }
     }
@@ -103,12 +104,6 @@ class BarriosController {
         barrio.save(flush:true)
     }
 
-    public static def feriantesAnuales() {
-        // Devolver los feriantes del año actual
-        def year = Calendar.instance.get(Calendar.YEAR).toString()
-        return Feriante.findAllByAnyo(year)
-    }
-
     // Obtiene de la base de datos de Barrios todos los años distintos
     private static def obtenerDistintosAnyos() {
         def results = Barrio.withCriteria {
@@ -156,23 +151,23 @@ class BarriosController {
     //
     // Scafolding
     //
-    @Secured(['ROLE_ADMIN'])
+    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE'])
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond Barrio.list(params), model:[barrioCount: Barrio.count()]
     }
 
-    @Secured(['ROLE_ADMIN'])
+    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE'])
     def show(Barrio barrio) {
         respond barrio
     }
 
-    @Secured(['ROLE_ADMIN'])
+    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE'])
     def create() {
         respond new Barrio(params)
     }
 
-    @Secured(['ROLE_ADMIN'])
+    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE'])
     @Transactional
     def save(Barrio barrio) {
         if (barrio == null) {
@@ -198,13 +193,13 @@ class BarriosController {
         }
     }
 
-    @Secured(['ROLE_ADMIN'])
+    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE'])
     def edit(Barrio barrio) {
         accesoService.crearAcceso(Tipo.TipoModificar, Recurso.RecursoBarrios, springSecurityService.currentUser, barrio.id)
         respond barrio
     }
 
-    @Secured(['ROLE_ADMIN'])
+    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE'])
     @Transactional
     def update(Barrio barrio) {
         accesoService.crearAcceso(Tipo.TipoModificar, Recurso.RecursoBarrios, springSecurityService.currentUser, barrio.id)
@@ -244,7 +239,7 @@ class BarriosController {
         }
     }
 
-    @Secured(['ROLE_ADMIN'])
+    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE'])
     protected void notFound() {
         request.withFormat {
             form multipartForm {

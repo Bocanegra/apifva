@@ -80,7 +80,7 @@ class ListadosController {
     }
 
     public static def feriantesAnuales(year) {
-        return Feriante.findAllByAnyo(year)
+        return Feriante.findAllByAnyo(year, [sort: 'parcela'])
     }
 }
 

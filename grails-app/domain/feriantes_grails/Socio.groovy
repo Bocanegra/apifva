@@ -15,6 +15,7 @@ class Socio {
     String telefonoFijo
     String nombreFijo
     String email
+    String negocios
 
     static constraints = {
         numeroSocio (nullable:false, blank:false)
@@ -30,10 +31,25 @@ class Socio {
         telefonoFijo (nullable: true)
         nombreFijo (nullable: true)
         email (email:true, nullable:true)
+        negocios (nullable:true, widget:'textarea')
     }
 
     static mapping = {
         table 'Socios'
     }
 
+    String getNombreConNumero() {
+        return "[${numeroSocio}]: ${nombre}"
+    }
+
+    @Override
+    String toString() {
+        def descrip = "[${numeroSocio}]-${nombre?:""}"
+        if (negocios) {
+            negocios.split("\n").each {
+                descrip += "\n\t- "+it
+            }
+        }
+        return descrip
+    }
 }

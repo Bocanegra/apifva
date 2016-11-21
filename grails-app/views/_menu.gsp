@@ -2,10 +2,10 @@
 
 <!-- Menu de Feriantes -->
 <li class="dropdown">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Feriantes <span class="caret"></span></a>
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Feria <span class="caret"></span></a>
     <ul class="dropdown-menu">
         <li><g:link controller="feriante" action="list">Listado de Feriantes</g:link></li>
-        <sec:ifAnyGranted roles='ROLE_ADMIN,ROLE_PRESIDENTE'>
+        <sec:ifAnyGranted roles='ROLE_ADMIN,ROLE_SECRETARIO,ROLE_PRESIDENTE'>
             <li><g:link controller="feriante" action="importer">Carga de Feriantes desde Excel</g:link></li>
         </sec:ifAnyGranted>
     </ul>
@@ -16,14 +16,14 @@
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Socios <span class="caret"></span></a>
     <ul class="dropdown-menu">
         <li><g:link controller="socio">Listado de Socios</g:link></li>
-        <sec:ifAnyGranted roles='ROLE_ADMIN,ROLE_PRESIDENTE'>
+        <sec:ifAnyGranted roles='ROLE_ADMIN,ROLE_SECRETARIO,ROLE_PRESIDENTE'>
             <li><g:link controller="socio" action="importer">Carga de Socios desde Excel</g:link></li>
         </sec:ifAnyGranted>
     </ul>
 </li>
 
 <!-- Menu de Usuarios -->
-<sec:ifAnyGranted roles='ROLE_ADMIN,ROLE_PRESIDENTE'>
+<sec:ifAnyGranted roles='ROLE_ADMIN,ROLE_SECRETARIO,ROLE_PRESIDENTE'>
     <li class="dropdown">
         <a href="${createLink(controller: 'user')}">Usuarios</a>
     </li>

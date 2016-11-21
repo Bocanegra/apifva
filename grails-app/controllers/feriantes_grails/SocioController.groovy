@@ -19,6 +19,7 @@ class SocioController {
     @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE'])
     def index(Integer max) {
         params.max = Math.min(max ?: 50, 100)
+        params.sort = 'numeroSocio'
         respond Socio.list(params), model:[socioCount: Socio.count()]
     }
 
@@ -124,12 +125,12 @@ class SocioController {
         }
     }
 
-    @Secured(['ROLE_ADMIN', 'ROLE_PRESIDENTE'])
+    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE'])
     def importer() {
 
     }
 
-    @Secured(['ROLE_ADMIN', 'ROLE_PRESIDENTE'])
+    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE'])
     def importing() {
         // Importante para leer bien acentos y demás símbolos
         System.setProperty("file.encoding", "ISO-8859-1")

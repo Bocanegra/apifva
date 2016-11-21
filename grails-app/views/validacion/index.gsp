@@ -24,7 +24,12 @@
                                       data:{'id':doc_id, 'campo':field.name, 'fecha':dateText }
                                   });
 				    },
-				    onClose: function() {
+				    onClose: function(dateText, inst) {
+				        if (jQuery(field).datepicker('getDate') >= new Date()) {
+				            $(field).removeClass('red').addClass('black');
+				        } else {
+				            $(field).removeClass('black').addClass('red');
+				        }
 				        jQuery(field).datepicker("destroy");
 				    }
 			    }).datepicker("show");
@@ -46,13 +51,23 @@
                 </g:if>
             </section>
 
-            <sec:ifAnyGranted roles='ROLE_ADMIN'>
+            <sec:ifAnyGranted roles='ROLE_ADMIN,ROLE_SECRETARIO,ROLE_PRESIDENTE'>
                 <ul class="property-list" role="navigation">
                     <li class="buttons">
                         <g:form action="delete">
                             Borrar documentaciones para el año:
                             <g:field name="year" type="text" size="4"/>
                             <g:field name="send" type="submit" value="Borrar" class="buttons"/>
+                        </g:form>
+                    </li>
+                    <li class="buttons">
+                        <g:form action="filter">
+                            Filtrar Feriantes con documentos caducados
+                            <g:field name="send" type="submit" value="Filtrar" class="buttons"/>
+                        </g:form>
+                        <g:form action="index">
+                            Quitar filtro
+                            <g:field name="send" type="submit" value="Quitar" class="buttons"/>
                         </g:form>
                     </li>
                 </ul>

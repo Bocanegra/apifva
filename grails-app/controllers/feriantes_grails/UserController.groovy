@@ -10,14 +10,14 @@ class UserController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
-    @Secured(['ROLE_ADMIN', 'ROLE_PRESIDENTE'])
+    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE'])
     def index(Integer max) {
         params.max = Math.min(max ?: 50, 100)
         respond User.list(params), model:[userCount: User.count(), roleList: Role.list()]
     }
 
     @Transactional
-    @Secured(['ROLE_ADMIN', 'ROLE_PRESIDENTE'])
+    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE'])
     def create() {
         def role = Role.findByAuthority(params.authority)
         def user = new User(username: params.username, password: params.password, enabled: params.enabled == "true").save(flush:true)
@@ -27,7 +27,7 @@ class UserController {
     }
 
     @Transactional
-    @Secured(['ROLE_ADMIN', 'ROLE_PRESIDENTE'])
+    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE'])
     def update(User user) {
         if (user == null) {
             transactionStatus.setRollbackOnly()
@@ -57,7 +57,7 @@ class UserController {
     }
 
     @Transactional
-    @Secured(['ROLE_ADMIN', 'ROLE_PRESIDENTE'])
+    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE'])
     def delete(User user) {
         if (user == null) {
             transactionStatus.setRollbackOnly()

@@ -77,8 +77,9 @@ class FerianteController {
     @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE'])
     def list() {
         def year = params.anyo ?: Calendar.instance.get(Calendar.YEAR).toString()
+        def paramOrdered = params + [sort: 'parcela']
         render (view: "list",
-                model:[anyos: obtenerDistintosAnyos(), ferianteList: Feriante.findAllByAnyo(year, params)])
+                model:[anyos: obtenerDistintosAnyos(), ferianteList: Feriante.findAllByAnyo(year, paramOrdered)])
     }
 
     @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE'])
@@ -181,12 +182,12 @@ class FerianteController {
         }
     }
 
-    @Secured(['ROLE_ADMIN', 'ROLE_PRESIDENTE'])
+    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE'])
     def importer() {
 
     }
 
-    @Secured(['ROLE_ADMIN', 'ROLE_PRESIDENTE'])
+    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE'])
     def importing() {
         // Importante para leer bien acentos y demás símbolos
         System.setProperty("file.encoding", "ISO-8859-1")

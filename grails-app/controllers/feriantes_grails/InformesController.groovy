@@ -1,6 +1,7 @@
 package feriantes_grails
 
 import grails.plugin.springsecurity.annotation.Secured
+import grails.web.servlet.mvc.GrailsParameterMap
 import org.docx4j.model.fields.merge.DataFieldName
 import org.docx4j.model.fields.merge.MailMerger
 import org.docx4j.model.fields.merge.MailMergerWithNext
@@ -27,7 +28,7 @@ class InformesController {
             accesoService.crearAcceso(Tipo.TipoCrear, Recurso.RecursoInformes, springSecurityService.currentUser, params.tipo)
 
             params.feriantes = (params.feriantes instanceof String) ? [params.feriantes] : params.feriantes
-            def docs = informes(params.tipo, params.feriantes)
+            def docs = informes(params)
             if (docs.size() > 0) {
                 // Crear zip con los ficheros y devolver
                 ByteArrayOutputStream baos = new ByteArrayOutputStream()
@@ -51,7 +52,14 @@ class InformesController {
         redirect (view:"index")
     }
 
-    def informes(tipo, ids_feriantes) {
+    def informes(params) {
+        def tipo = params.tipo
+        def ids_feriantes = params.feriantes
+        def others = ['iban': params.iban,
+                      'fecha_primer_pago': params.fecha_primer_pago,
+                      'fecha_segundo_pago': params.fecha_segundo_pago,
+                      'fecha_fianza': params.fecha_fianza,
+                      'fecha_documentacion': params.fecha_documentacion]
         log.fatal("Generando informes de tipo ${tipo}")
         def docs = []
         def docxFile = grailsResourceLocator.findResourceForURI("/${tipo}.docx")
@@ -61,7 +69,7 @@ class InformesController {
             WordprocessingMLPackage wordMLPackage = WordprocessingMLPackage.load(docxFile.inputStream)
             ids_feriantes.each { f_id ->
                 Feriante feriante = Feriante.get(f_id)
-                def mappings = creaMappings(feriante)
+                def mappings = creaMappings(feriante, others)
 
                 // Se rellenan todos los campos posibles de las plantillas
                 MailMerger.setMERGEFIELDInOutput(MailMerger.OutputField.KEEP_MERGEFIELD);
@@ -76,7 +84,7 @@ class InformesController {
             ids_feriantes.each { f_id ->
                 Feriante feriante = Feriante.get(f_id)
                 if (feriante.direccion && feriante.provincia) {
-                    list_mappings.add(creaMappings(feriante))
+                    list_mappings.add(creaMappings(feriante, null))
                 }
             }
 
@@ -93,10 +101,12 @@ class InformesController {
     def feriantesAnuales() {
         // Comprobar si ya se han creado los feriantes de este año
         def year = Calendar.instance.get(Calendar.YEAR).toString()
-        return Feriante.findAllByAnyo(year)
+        return Feriante.findAllByAnyo(year, [sort: 'parcela'])
     }
 
-    def creaMappings(Feriante feriante) {
+    def creaMappings(Feriante feriante, otros_datos) {
+        log.fatal(otros_datos)
+
         def mappings = new HashMap<DataFieldName, String>()
         mappings.put(new DataFieldName("Anyo"), feriante.anyo)
         mappings.put(new DataFieldName("Parcela"), feriante.parcela.toString())
@@ -119,14 +129,30 @@ class InformesController {
         mappings.put(new DataFieldName("Pago1"), feriante.pago1.toString())
         mappings.put(new DataFieldName("Pago2"), feriante.pago2.toString())
         mappings.put(new DataFieldName("Fianza"), feriante.fianza.toString())
-
+        if (otros_datos) {
+            if (otros_datos.iban) {
+                mappings.put(new DataFieldName("IBAN"), otros_datos.iban)
+            }
+            if (otros_datos.fecha_primer_pago) {
+                mappings.put(new DataFieldName("Fecha_Pago1"), otros_datos.fecha_primer_pago)
+            }
+            if (otros_datos.fecha_segundo_pago) {
+                mappings.put(new DataFieldName("Fecha_Pago2"), otros_datos.fecha_segundo_pago)
+            }
+            if (otros_datos.fecha_fianza) {
+                mappings.put(new DataFieldName("Fecha_fianza"), otros_datos.fecha_fianza)
+            }
+            if (otros_datos.fecha_documentacion) {
+                mappings.put(new DataFieldName("Fecha_doc"), otros_datos.fecha_documentacion)
+            }
+        }
         return mappings
     }
 }
 
 public enum TipoInformes {
 
-    INFORMATIVO('Documento informativo'),
+    INFORMATIVO('Documento de pago'),
     JUSTIFICANTE('Justificante de pagos'),
     ETIQUETAS('Etiquetas')
 

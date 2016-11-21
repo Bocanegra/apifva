@@ -1,4 +1,4 @@
-<%@ page import="feriantes_grails.Barrio" %>
+<%@ page import="feriantes_grails.Socio; feriantes_grails.Barrio" %>
 <!doctype html>
 <html>
     <head>
@@ -45,7 +45,7 @@
             <section class="row colset-2-its">
                 <h1>Generación de documentación para las Ferias</h1>
 
-                <sec:ifAnyGranted roles='ROLE_ADMIN'>
+                <sec:ifAnyGranted roles='ROLE_ADMIN, ROLE_SECRETARIO, ROLE_PRESIDENTE'>
                     <g:link action="list">Listado de Barrios</g:link>
                 </sec:ifAnyGranted>
 
@@ -99,7 +99,8 @@
                                     <span>Socios</span>
                                 </td>
                                 <td>
-                                    <g:select id="socio" name="socio" from="${ferianteList}" value="${nombre}"/>
+                                    <g:select id="socio" name="socio" from="${sociosList}"
+                                              optionValue="nombreConNumero"/>
                                 </td>
                                 <td>
                                     <g:field type="button" name="add_socio" value="Añadir" onclick="appendSocio()"/>
@@ -107,7 +108,7 @@
                             </tr>
                             <tr>
                                 <td colspan="3">
-                                    <g:textArea name="socios" value="${sociosTxt}" rows="5"
+                                    <g:textArea name="socios" value="${sociosTxt}" rows="10"
                                                 class="barrios_text_area" onchange="updateDoc()"/>
                                 </td>
                             </tr>

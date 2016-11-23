@@ -507,7 +507,7 @@ th:hover, tr:hover {
 .buttons input,
 .buttons a {
     background-color: transparent;
-    border: 0;
+    border-width: 0.1em;
     color: #666666;
     cursor: pointer;
     display: inline-block;

@@ -71,7 +71,10 @@ class ListadosController {
             response.setHeader "Content-disposition", "attachment; filename=impresion.pdf"
         }
         def year = params.anyo ?: Calendar.instance.get(Calendar.YEAR).toString()
-        def campos_on = params.findAll { it.value == "on" }
+        def campos_on = params.findAll { param ->
+            param.key in Holders.applicationContext.getBean("feriantes_grails.Feriante").properties.keySet() &&
+            param.value != ""
+        }.sort { it.value.toInteger() }
         pdfRenderingService.render([controller: 'listados',
                                     template: 'personalizado',
                                     model:[ferianteList: feriantesAnuales(year),

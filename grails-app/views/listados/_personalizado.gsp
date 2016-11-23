@@ -40,15 +40,15 @@
                 <table class="table" width="100%">
                     <thead>
                         <tr class="center header">
-                            <g:each in="${fieldList.sort()}" var="cabecera">
-                                <th>${cabecera}</th>
+                            <g:each in="${fieldList}" var="cabecera">
+                                <th>${cabecera.capitalize()}</th>
                             </g:each>
                         </tr>
                     </thead>
                     <tbody>
                         <g:each in="${ferianteList}" var="feriante" status="i">
                             <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-                                <g:each in="${fieldList.sort()}" var="campo">
+                                <g:each in="${fieldList}" var="campo">
                                     <td>${feriante[campo]}</td>
                                 </g:each>
                             </tr>

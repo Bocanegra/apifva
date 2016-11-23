@@ -39,7 +39,7 @@
                             <g:field name="download" type="submit" class="save" value="Descargar"/>
                             <br/>
                             <g:each in="${properties}" var="prop">
-                                <g:checkBox name="${prop}"/><span>${prop}</span><br/>
+                                <g:textField name="${prop}" size="2"/><span>${prop}</span><br/>
                             </g:each>
                         </g:form>
                     </li>

@@ -35,12 +35,18 @@
                     </li>
                     <li class="controller buttons">
                         <g:form id="form_id" action="personalizado">
-                            <g:field name="submit" type="submit" value="Personalizado"/>
-                            <g:field name="download" type="submit" class="save" value="Descargar"/>
-                            <br/>
-                            <g:each in="${properties}" var="prop">
-                                <g:textField name="${prop}" size="2"/><span>${prop}</span><br/>
-                            </g:each>
+                            <ul class="columnas_3">
+                                <li>
+                                    <g:field name="submit" type="submit" value="Personalizado"/>
+                                </li>
+                                <li>
+                                    <g:field name="download" type="submit" class="save" value="Descargar"/>
+                                </li>
+                                <br/>
+                                <g:each in="${properties}" var="prop">
+                                    <li><g:textField name="${prop}" size="2"/><span>${prop}</span><br/></li>
+                                </g:each>
+                            </ul>
                         </g:form>
                     </li>
                 </ul>

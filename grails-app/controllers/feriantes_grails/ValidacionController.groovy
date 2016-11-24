@@ -104,9 +104,14 @@ class ValidacionController {
         // Llamada remota AJAX
         def doc = Documentacion.get(params.id)
         def campo = params.campo
-        def fecha = params.date("fecha", "dd-MM-yy")
-        if (doc && campo && fecha) {
-            doc[campo] = fecha
+        if (doc && campo) {
+            def valor
+            if (params.borrar == "1") {
+                valor = null
+            } else {
+                valor = params.date("fecha", "dd-MM-yy")
+            }
+            doc[campo] = valor
             doc.save()
         }
         render ""

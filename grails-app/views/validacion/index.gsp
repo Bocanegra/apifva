@@ -19,12 +19,20 @@
             function open_calendar(doc_id, field) {
                 jQuery(field).datepicker({
 				    dateFormat: "dd-mm-y",
+                    showButtonPanel: true,
+                    closeText: 'Borrar',
 				    onSelect: function(dateText, inst) {
                                   $.ajax({url:'${g.createLink(controller:"validacion", action:"update_fechas")}',
                                       data:{'id':doc_id, 'campo':field.name, 'fecha':dateText }
                                   });
 				    },
 				    onClose: function(dateText, inst) {
+                        if ($(window.event.srcElement).hasClass('ui-datepicker-close')) {
+                            field.value = '';
+                            $.ajax({url:'${g.createLink(controller:"validacion", action:"update_fechas")}',
+                                    data:{'id':doc_id, 'campo':field.name, 'borrar': 1 }
+                            });
+                        }
 				        if (jQuery(field).datepicker('getDate') >= new Date()) {
 				            $(field).removeClass('red').addClass('black');
 				        } else {

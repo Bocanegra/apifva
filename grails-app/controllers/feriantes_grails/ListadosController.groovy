@@ -18,7 +18,8 @@ class ListadosController {
     @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE'])
     def index() {
         def ferianteBean = Holders.applicationContext.getBean("feriantes_grails.Feriante")
-        render(view: "index", model:[properties:ferianteBean.properties.keySet().sort()])
+        def properties = ferianteBean.properties.keySet().grep { it != "anyo" }.sort()
+        render(view: "index", model:[properties:properties])
     }
 
     @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE'])

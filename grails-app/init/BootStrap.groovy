@@ -16,12 +16,12 @@ class BootStrap {
             def gestoriaRole = new Role(authority: 'ROLE_GESTORIA').save(flush: true)
             def socioRole = new Role(authority: 'ROLE_SOCIO').save(flush: true)
 
-            def adminUser = new User(username: 'Admin', password: '1234').save(flush: true)
-            def secretarioUser = new User(username: 'Secretario', password: '1234').save(flush: true)
-            def presidenteUser = new User(username: 'Presidente', password: '1234').save(flush: true)
-            def viceUser = new User(username: 'Vice', password: '1234').save(flush: true)
-            def gestoriaUser = new User(username: 'Gestoria', password: '1234').save(flush: true)
-            def socioUser = new User(username: 'Socio', password: '1234').save(flush: true)
+            def adminUser = new User(username: 'admin', password: '1234').save(flush: true)
+            def secretarioUser = new User(username: 'secretario', password: '1234').save(flush: true)
+            def presidenteUser = new User(username: 'presidente', password: '1234').save(flush: true)
+            def viceUser = new User(username: 'vicepresidente', password: '1234').save(flush: true)
+            def gestoriaUser = new User(username: 'gestoria', password: '1234').save(flush: true)
+            def socioUser = new User(username: 'socio', password: '1234').save(flush: true)
 
             UserRole.create(adminUser, adminRole)
             UserRole.create(secretarioUser, secretarioRole)
@@ -33,10 +33,6 @@ class BootStrap {
                 it.flush()
                 it.clear()
             }
-
-            assert User.count == numeroUsers
-            assert Role.count == numeroUsers
-            assert UserRole.count == numeroUsers
         }
 
     }

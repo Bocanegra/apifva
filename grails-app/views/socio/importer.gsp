@@ -9,7 +9,7 @@
     <body>
         <ul class="nav" role="navigation">
             <li><a class="home" href="${createLink(uri: '/')}">Inicio</a></li>
-            <li><a class="list" href="${createLink(action: 'list')}">Listado de Socios</a></li>
+            <li><a class="list" href="${createLink(action: 'index')}">Listado de Socios</a></li>
         </ul>
 
         <div id="content" role="main">

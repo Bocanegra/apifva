@@ -62,11 +62,40 @@ class Feriante {
         pagado (nullable:true)
         email (email:true, nullable:true)
         IBAN (nullable:true)
-        documentacion (nullable:true)
+        documentacion (nullable:true, cascade: 'all-delete-orphan')
     }
 
     static mapping = {
         table 'Feriantes'
+    }
+
+    def beforeUpdate() {
+        normalizaValores()
+    }
+
+    def beforeInsert() {
+        normalizaValores()
+    }
+
+    def normalizaValores() {
+        if (gastos == null) {
+            gastos = 0
+        }
+        if (luzAgua == null) {
+            luzAgua = 0
+        }
+        if (vivienda == null) {
+            vivienda = 0
+        }
+        if (maquinas == null) {
+            maquinas = 0
+        }
+        if (deuda == null) {
+            deuda = 0
+        }
+        if (sancion == null) {
+            sancion = 0
+        }
     }
 
     int getSitio() {
@@ -74,7 +103,12 @@ class Feriante {
     }
 
     int getTotal() {
-        sitio + gastos + luzAgua + vivienda + maquinas + deuda + sancion
+        try {
+            return sitio + gastos + luzAgua + vivienda + maquinas + deuda + sancion
+        } catch (Exception exc) {
+            log.error("Error al obtener Total: "+exc)
+            return 0
+        }
     }
 
     int getPago1() {

@@ -45,7 +45,7 @@
             <section class="row colset-2-its">
                 <h1>Generación de documentación para las Ferias</h1>
 
-                <sec:ifAnyGranted roles='ROLE_ADMIN, ROLE_SECRETARIO, ROLE_PRESIDENTE'>
+                <sec:ifAnyGranted roles='ROLE_ADMIN'>
                     <g:link action="list">Listado de Barrios</g:link>
                 </sec:ifAnyGranted>
 
@@ -56,7 +56,7 @@
 
                 <div id="barrios_left_col">
                     <table style="border-top-width:0">
-                        <tr>
+                        <tr style="background-color: #66afe9">
                             <g:form action="index">
                                 <td style="width:25%">
                                     <span>Cargar datos de</span>
@@ -65,12 +65,12 @@
                                     <g:select id="barrio" name="barrio" from="${Barrio.list()}" optionKey="id"/>
                                 </td>
                                 <td style="width:15%">
-                                    <g:submitButton name="cargar" value="Cargar"/>
+                                    <g:submitButton name="cargar" value="Cargar datos de este año"/>
                                 </td>
                             </g:form>
                         </tr>
 
-                        <tr>
+                        <tr style="background-color: #66afe9">
                             <g:form action="nuevo_barrio">
                                 <td>
                                     <span>Nuevo Barrio</span>
@@ -86,8 +86,28 @@
 
                         <g:uploadForm action="generar_fichero">
                             <tr>
+                                <td></td>
+                                <td><h2>Datos para la generación de documentación</h2></td>
+                            </tr>
+                            <tr>
+                                <td><span>Ubicación de la instalación</span></td>
+                                <td><g:textField name="ubicacion" value="${ubicacion}" size="40"/><br/></td>
+                            </tr>
+                            <tr>
+                                <td><span>Fechas montaje</span></td>
+                                <td><g:textField name="montaje" value="${montaje}" size="40"/><br/></td>
+                            </tr>
+                            <tr>
+                                <td><span>Fechas apertura</span></td>
+                                <td><g:textField name="apertura" value="${apertura}" size="40"/><br/></td>
+                            </tr>
+                            <tr>
+                                <td><span>Fechas desmontaje</span></td>
+                                <td><g:textField name="desmontaje" value="${desmontaje}" size="40"/><br/></td>
+                            </tr>
+                            <tr>
                                 <td>
-                                    <span>Lugar</span>
+                                    <span>Barrio</span>
                                 </td>
                                 <td>
                                     <g:select name="lugar" from="${lugares}" onchange="updateDoc()"/><br/>

@@ -142,6 +142,12 @@ class SocioController {
             return
         }
 
+        if (Socio.count > 0) {
+            flash.message = "Ya hay Socios cargados, no se pueden volver a cargar"
+            render(view: 'importer')
+            return
+        }
+
         accesoService.crearAcceso(Tipo.TipoCrear, Recurso.RecursoSocios, springSecurityService.currentUser, "Carga desde Excel")
         Workbook workbook = Workbook.getWorkbook(f.getInputStream())
         Sheet sheet = workbook.getSheet(0)

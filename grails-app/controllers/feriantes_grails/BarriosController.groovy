@@ -28,6 +28,10 @@ class BarriosController {
             def barrio = Barrio.get(params.barrio)
             render(view: "index", model:[sociosList: listaSocios,
                                          lugares: obtenerDistintosLugares(),
+                                         ubicacion: barrio.ubicacion,
+                                         montaje: barrio.fechaMontaje,
+                                         apertura: barrio.fechaApertura,
+                                         desmontaje: barrio.fechaDesmontaje,
                                          sociosTxt: barrio.socios,
                                          nosociosTxt: barrio.nosocios])
 
@@ -63,7 +67,12 @@ class BarriosController {
             WordprocessingMLPackage wordMLPackage = WordprocessingMLPackage.load(docxFile.inputStream)
             // Se rellenan todos los campos posibles de las plantillas
             def mappings = new HashMap<DataFieldName, String>()
-            mappings.put(new DataFieldName("Lugar"), params.lugar.toUpperCase())
+            mappings.put(new DataFieldName("NombreFiesta"), params.lugar)
+            mappings.put(new DataFieldName("Ubicacion"), params.ubicacion)
+            mappings.put(new DataFieldName("FechaMontaje"), params.montaje)
+            mappings.put(new DataFieldName("FechaApertura"), params.apertura)
+            mappings.put(new DataFieldName("FechaDesmontaje"), params.desmontaje)
+            mappings.put(new DataFieldName("Lugar"), params.lugar?.toUpperCase())
             mappings.put(new DataFieldName("TextSocios"), params.socios)
             mappings.put(new DataFieldName("TextNoSocios"), params.nosocios)
             // Se añade la imagen
@@ -96,6 +105,10 @@ class BarriosController {
         log.error("Barrio ${barrio}")
         // Y se actualiza con los nuevos datos
         accesoService.crearAcceso(Tipo.TipoModificar, Recurso.RecursoBarrios, springSecurityService.currentUser, params.lugar)
+        barrio.ubicacion = params.ubicacion
+        barrio.fechaMontaje = params.montaje
+        barrio.fechaApertura = params.apertura
+        barrio.fechaDesmontaje = params.desmontaje
         barrio.socios = params.socios
         barrio.nosocios = params.nosocios
 //        def planoFile = request.getFile("plano")

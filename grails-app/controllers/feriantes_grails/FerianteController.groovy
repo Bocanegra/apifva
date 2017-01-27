@@ -59,7 +59,7 @@ class FerianteController {
     @Transactional
     @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE'])
     def deleteFeriantes() {
-        if (params.anyo && params.anyo != Feriante.anyoBase) {
+        if (params.anyo) {
             accesoService.crearAcceso(Tipo.TipoBorrar, Recurso.RecursoFeriantes, springSecurityService.currentUser, params.anyo)
             Feriante.findAllByAnyo(params.anyo).each {
                 try {
@@ -165,7 +165,7 @@ class FerianteController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.deleted.message', args: [message(code: 'feriante.label', default: 'Feriante'), feriante.id])
-                redirect action:"index", method:"GET"
+                redirect action: "list", method:"GET"
             }
             '*'{ render status: NO_CONTENT }
         }
@@ -195,6 +195,12 @@ class FerianteController {
         def f = request.getFile("datosExcel")
         if (f.empty) {
             flash.message = "Es necesario un fichero Excel"
+            render(view: 'importer')
+            return
+        }
+
+        if (Feriante.count > 0) {
+            flash.message = "Ya hay Feriantes cargados, no se pueden volver a cargar"
             render(view: 'importer')
             return
         }

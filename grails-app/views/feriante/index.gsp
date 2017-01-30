@@ -27,8 +27,9 @@
                             <h2>Ferias de Valladolid</h2>
                             <ul class="buttons">
                                 <li class="controller"><g:link controller="listados" action="index">1. Listados</g:link></li>
-                                <li class="controller"><g:link controller="informes" action="index">2. Generación de Informes</g:link></li>
-                                <li class="controller"><g:link controller="validacion" action="index">3. Validación de documentaciones</g:link></li>
+                                <li class="controller"><g:link controller="informes" action="index">2. Generación de Informes y etiquetas</g:link></li>
+                                <li class="controller"><g:link controller="informes" action="socios">3. Etiquetas de Socios</g:link></li>
+                                <li class="controller"><g:link controller="validacion" action="index">4. Validación de documentaciones</g:link></li>
                             </ul>
                             <h2>Ferias de los Barrios</h2>
                             <ul class="buttons">

@@ -23,6 +23,11 @@ class InformesController {
     }
 
     @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE'])
+    def socios() {
+        render(view:"socios", model:["sociosList": Socio.list()])
+    }
+
+    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE'])
     def generar() {
         if (params.tipo && params.feriantes) {
             accesoService.crearAcceso(Tipo.TipoCrear, Recurso.RecursoInformes, springSecurityService.currentUser, params.tipo)
@@ -54,6 +59,7 @@ class InformesController {
 
     def informes(params) {
         def tipo = params.tipo
+        def socios = params.socios
         def ids_feriantes = params.feriantes
         def others = ['iban': params.iban,
                       'fecha_primer_pago': params.fecha_primer_pago,
@@ -79,12 +85,21 @@ class InformesController {
                 docs.add(tmpFile)
             }
         } else if (tipo == TipoInformes.ETIQUETAS.key) {
+            // Etiquetas de Feriantes y de Socios
             WordprocessingMLPackage wordMLPackage = WordprocessingMLPackage.load(docxFile.inputStream)
             def list_mappings = new ArrayList<Map<DataFieldName, String>>()
+            // Añado uno vacío por un BUG en la librería, si no se hace se come una etiqueta
+            list_mappings.add(new HashMap<DataFieldName, String>())
+
             ids_feriantes.each { f_id ->
-                Feriante feriante = Feriante.get(f_id)
-                if (feriante.direccion && feriante.provincia) {
-                    list_mappings.add(creaMappings(feriante, null))
+                if (socios) {
+                    Socio socio = Socio.get(f_id)
+                    list_mappings.add(creaMappingSocio(socio))
+                } else {
+                    Feriante feriante = Feriante.get(f_id)
+                    if (feriante.direccion && feriante.provincia) {
+                        list_mappings.add(creaMappings(feriante, null))
+                    }
                 }
             }
 
@@ -105,8 +120,6 @@ class InformesController {
     }
 
     def creaMappings(Feriante feriante, otros_datos) {
-        log.fatal(otros_datos)
-
         def mappings = new HashMap<DataFieldName, String>()
         mappings.put(new DataFieldName("Anyo"), feriante.anyo)
         mappings.put(new DataFieldName("Parcela"), feriante.parcela.toString())
@@ -146,6 +159,16 @@ class InformesController {
                 mappings.put(new DataFieldName("Fecha_doc"), otros_datos.fecha_documentacion)
             }
         }
+        return mappings
+    }
+
+    def creaMappingSocio(Socio socio) {
+        def mappings = new HashMap<DataFieldName, String>()
+        mappings.put(new DataFieldName("Nombre"), socio.nombre)
+        mappings.put(new DataFieldName("Direccion"), socio.direccion)
+        mappings.put(new DataFieldName("CP"), socio.codigoPostal)
+        mappings.put(new DataFieldName("Poblacion"), socio.poblacion)
+        mappings.put(new DataFieldName("Provincia"), socio.provincia)
         return mappings
     }
 }

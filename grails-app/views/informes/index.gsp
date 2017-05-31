@@ -9,6 +9,9 @@
             function checkAll() {
                 $("input[type='checkbox']").prop("checked", true);
             }
+            function checkNone() {
+                $("input[type='checkbox']").prop("checked", false);
+            }
             function showPagoOpts() {
                 if ($('#tipo_informe option:selected').index() == 0) {
                     $('#info_doc_pago').show();
@@ -73,7 +76,10 @@
                     <table>
                         <thead>
                             <tr>
-                                <th width="2"><g:field name="todos" type="button" value="Todos" onclick="checkAll()"/></th>
+                                <th width="2">
+                                    <g:field name="todos" type="button" value="Todos" onclick="checkAll()"/><br/>
+                                    <g:field name="ninguno" type="button" value="Ninguno" onclick="checkNone()"/>
+                                </th>
                                 <g:sortableColumn property="anyo" title="Año"/>
                                 <g:sortableColumn property="parcela" title="Parcela"/>
                                 <g:sortableColumn property="nombre" title="Nombre"/>

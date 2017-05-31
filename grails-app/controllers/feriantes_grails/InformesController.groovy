@@ -1,12 +1,10 @@
 package feriantes_grails
 
 import grails.plugin.springsecurity.annotation.Secured
-import grails.web.servlet.mvc.GrailsParameterMap
-import org.docx4j.model.fields.merge.DataFieldName
-import org.docx4j.model.fields.merge.MailMerger
-import org.docx4j.model.fields.merge.MailMergerWithNext
-import org.docx4j.openpackaging.packages.*
-import org.docx4j.openpackaging.parts.WordprocessingML.MainDocumentPart
+import org.docx4j.model.fields.merge.*
+import org.docx4j.model.structure.PageSizePaper
+import org.docx4j.openpackaging.packages.WordprocessingMLPackage
+import org.docx4j.openpackaging.contenttype.*
 import java.util.zip.*
 
 
@@ -34,7 +32,7 @@ class InformesController {
 
             params.feriantes = (params.feriantes instanceof String) ? [params.feriantes] : params.feriantes
             def docs = informes(params)
-            if (docs.size() > 0) {
+            if (docs.size() > 1) {
                 // Crear zip con los ficheros y devolver
                 ByteArrayOutputStream baos = new ByteArrayOutputStream()
                 ZipOutputStream zipFile = new ZipOutputStream(baos)
@@ -51,8 +49,14 @@ class InformesController {
                 response.contentType = "application/zip"
                 response.outputStream << baos.toByteArray()
                 response.outputStream.flush()
-                return
+            } else {
+                // Un único fichero, lo devuelvo suelto
+                response.setContentType(ContentTypes.WORDPROCESSINGML_DOCUMENT)
+                response.setHeader("Content-disposition", "attachment; filename=\"${params.tipo}.docx\"")
+                response.outputStream << docs[0].newInputStream()
+                response.outputStream.flush()
             }
+            return
         }
         redirect (view:"index")
     }
@@ -72,18 +76,32 @@ class InformesController {
         if (!docxFile) {
             flash.message = "Plantilla para el tipo de informe no encontrada"
         } else if (tipo in [TipoInformes.INFORMATIVO.key, TipoInformes.JUSTIFICANTE.key]) {
-            WordprocessingMLPackage wordMLPackage = WordprocessingMLPackage.load(docxFile.inputStream)
+            // Se carga un documento en blanco, para ir añadiendo documentos
+            WordprocessingMLPackage finalDoc = WordprocessingMLPackage.load(docxFile.inputStream)
+            def firstTime = true
+            // Se crea un documento por Feriante
             ids_feriantes.each { f_id ->
+                WordprocessingMLPackage docFeriante = WordprocessingMLPackage.load(docxFile.inputStream)
                 Feriante feriante = Feriante.get(f_id)
                 def mappings = creaMappings(feriante, others)
 
                 // Se rellenan todos los campos posibles de las plantillas
                 MailMerger.setMERGEFIELDInOutput(MailMerger.OutputField.KEEP_MERGEFIELD);
-                MailMerger.performMerge(wordMLPackage, mappings, true);
-                File tmpFile = File.createTempFile("${tipo}-Parcela_${feriante.parcela}-", ".docx")
-                wordMLPackage.save(tmpFile)
-                docs.add(tmpFile)
+                MailMerger.performMerge(docFeriante, mappings, true);
+
+                // Se mezcla con el documento final, excepto la primera vez que cogemos el primer documento
+                if (firstTime) {
+                    finalDoc = docFeriante
+                    firstTime = false
+                } else {
+                    docFeriante.getMainDocumentPart().getContent().each { obj ->
+                        finalDoc.getMainDocumentPart().getContent().add(obj)
+                    }
+                }
             }
+            File tmpFile = File.createTempFile("${tipo}-", ".docx")
+            finalDoc.save(tmpFile)
+            docs.add(tmpFile)
         } else if (tipo == TipoInformes.ETIQUETAS.key) {
             // Etiquetas de Feriantes y de Socios
             WordprocessingMLPackage wordMLPackage = WordprocessingMLPackage.load(docxFile.inputStream)
@@ -130,18 +148,18 @@ class InformesController {
         mappings.put(new DataFieldName("CP"), feriante.codigoPostal)
         mappings.put(new DataFieldName("Poblacion"), feriante.poblacion)
         mappings.put(new DataFieldName("Provincia"), feriante.provincia)
-        mappings.put(new DataFieldName("Sitio"), feriante.sitio.toString())
-        mappings.put(new DataFieldName("Gastos"), feriante.gastos.toString())
-        mappings.put(new DataFieldName("LuzAgua"), feriante.luzAgua.toString())
-        mappings.put(new DataFieldName("Vivienda"), feriante.vivienda.toString())
-        mappings.put(new DataFieldName("Maquinas"), feriante.maquinas.toString())
-        mappings.put(new DataFieldName("Deuda"), feriante.deuda.toString())
-        mappings.put(new DataFieldName("Sanciones"), feriante.sancion.toString())
+        mappings.put(new DataFieldName("Sitio"), feriante.sitio.toString().replaceFirst('^(\\d+)(\\d{3})(\\.|$)', '$1.$2$3'))
+        mappings.put(new DataFieldName("Gastos"), feriante.gastos.toString().replaceFirst('^(\\d+)(\\d{3})(\\.|$)', '$1.$2$3'))
+        mappings.put(new DataFieldName("LuzAgua"), feriante.luzAgua.toString().replaceFirst('^(\\d+)(\\d{3})(\\.|$)', '$1.$2$3'))
+        mappings.put(new DataFieldName("Vivienda"), feriante.vivienda.toString().replaceFirst('^(\\d+)(\\d{3})(\\.|$)', '$1.$2$3'))
+        mappings.put(new DataFieldName("Maquinas"), feriante.maquinas.toString().replaceFirst('^(\\d+)(\\d{3})(\\.|$)', '$1.$2$3'))
+        mappings.put(new DataFieldName("Deuda"), feriante.deuda.toString().replaceFirst('^(\\d+)(\\d{3})(\\.|$)', '$1.$2$3'))
+        mappings.put(new DataFieldName("Sanciones"), feriante.sancion.toString().replaceFirst('^(\\d+)(\\d{3})(\\.|$)', '$1.$2$3'))
         mappings.put(new DataFieldName("MotivoSanciones"), feriante.motivoSancion)
-        mappings.put(new DataFieldName("Total"), feriante.total.toString())
-        mappings.put(new DataFieldName("Pago1"), feriante.pago1.toString())
-        mappings.put(new DataFieldName("Pago2"), feriante.pago2.toString())
-        mappings.put(new DataFieldName("Fianza"), feriante.fianza.toString())
+        mappings.put(new DataFieldName("Total"), feriante.total.toString().replaceFirst('^(\\d+)(\\d{3})(\\.|$)', '$1.$2$3'))
+        mappings.put(new DataFieldName("Pago1"), feriante.pago1.toString().replaceFirst('^(\\d+)(\\d{3})(\\.|$)', '$1.$2$3'))
+        mappings.put(new DataFieldName("Pago2"), feriante.pago2.toString().replaceFirst('^(\\d+)(\\d{3})(\\.|$)', '$1.$2$3'))
+        mappings.put(new DataFieldName("Fianza"), feriante.fianza.toString().replaceFirst('^(\\d+)(\\d{3})(\\.|$)', '$1.$2$3'))
         if (otros_datos) {
             if (otros_datos.iban) {
                 mappings.put(new DataFieldName("IBAN"), otros_datos.iban)

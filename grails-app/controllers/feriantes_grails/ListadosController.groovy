@@ -32,7 +32,8 @@ class ListadosController {
         def year = params.anyo ?: Calendar.instance.get(Calendar.YEAR).toString()
         pdfRenderingService.render([controller: 'listados',
                                     template: 'ayuntamiento',
-                                    model:[ferianteList: feriantesAnuales(year)]
+                                    model:[ferianteList: feriantesAnuales(year),
+                                    year: year]
         ], response)
     }
 
@@ -46,7 +47,8 @@ class ListadosController {
         def year = params.anyo ?: Calendar.instance.get(Calendar.YEAR).toString()
         pdfRenderingService.render([controller: 'listados',
                                     template: 'impresion',
-                                    model:[ferianteList: feriantesAnuales(year)]
+                                    model:[ferianteList: feriantesAnuales(year),
+                                    year: year]
         ], response)
     }
 

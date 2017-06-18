@@ -17,6 +17,10 @@ class Feriante {
     Integer precio1 = 0
     Integer superficie2 = 0
     Integer precio2 = 0
+    Double dSuperficie1 = 0.0
+    Double dPrecio1 = 0.0
+    Double dSuperficie2 = 0.0
+    Double dPrecio2 = 0.0
     String dni
     String email
     String IBAN
@@ -50,6 +54,10 @@ class Feriante {
         precio1 (nullable:true)
         superficie2 (nullable:true)
         precio2 (nullable:true)
+        dSuperficie1 (nullable:true)
+        dPrecio1 (nullable:true)
+        dSuperficie2 (nullable:true)
+        dPrecio2 (nullable:true)
         dni (nullable:true)
         gastos (nullable:true)
         luzAgua (nullable:true)
@@ -99,7 +107,7 @@ class Feriante {
     }
 
     int getSitio() {
-        superficie1 * precio1 + superficie2 * precio2
+        ((dSuperficie1 * dPrecio1 + dSuperficie2 * dPrecio2) * 10).intValue() / 10
     }
 
     int getTotal() {
@@ -127,4 +135,21 @@ class Feriante {
     String toString() {
         return "${parcela}-[${anyo}]-${nombre?:""}"
     }
+
+    String formatSuperficie1() {
+        return dSuperficie1.toString().replace(".", ",")
+    }
+
+    String formatSuperficie2() {
+        return dSuperficie2.toString().replace(".", ",")
+    }
+
+    String formatPrecio1() {
+        return dPrecio1.toString().replace(".", ",")
+    }
+
+    String formatPrecio2() {
+        return dPrecio2.toString().replace(".", ",")
+    }
+
 }

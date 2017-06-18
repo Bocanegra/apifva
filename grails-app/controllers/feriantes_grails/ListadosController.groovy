@@ -85,6 +85,17 @@ class ListadosController {
         ], response)
     }
 
+    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE'])
+    def socios() {
+        accesoService.crearAcceso(Tipo.TipoCrear, Recurso.RecursoDocumentos, springSecurityService.currentUser, "Listado Socios")
+        response.contentType = "application/pdf"
+        response.setHeader "Content-disposition", "attachment; filename=socios.pdf"
+        pdfRenderingService.render([controller: 'listados',
+                                    template: 'socios',
+                                    model:[sociosList: Socio.findAll()]
+        ], response)
+    }
+
     public static def feriantesAnuales(year) {
         return Feriante.findAllByAnyo(year, [sort: 'parcela'])
     }

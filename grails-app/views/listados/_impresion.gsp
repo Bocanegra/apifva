@@ -53,10 +53,10 @@
                                 <td>${feriante.parcela}</td>
                                 <td>${feriante.nombre}</td>
                                 <td>${feriante.negocio}</td>
-                                <td>${feriante.superficie1}</td>
-                                <td>${feriante.precio1}</td>
-                                <td>${feriante.superficie2}</td>
-                                <td>${feriante.precio2}</td>
+                                <td>${feriante.dSuperficie1}</td>
+                                <td>${feriante.dPrecio1}</td>
+                                <td>${feriante.dSuperficie2}</td>
+                                <td>${feriante.dPrecio2}</td>
                                 <td>${feriante.sitio}</td>
                                 <td>${feriante.gastos}</td>
                                 <td>${feriante.luzAgua}</td>

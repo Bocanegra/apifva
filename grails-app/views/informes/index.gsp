@@ -84,8 +84,8 @@
                                 <g:sortableColumn property="parcela" title="Parcela"/>
                                 <g:sortableColumn property="nombre" title="Nombre"/>
                                 <g:sortableColumn property="negocio" title="Negocio"/>
-                                <g:sortableColumn property="superficie1" title="Superficie 1"/>
-                                <g:sortableColumn property="superficie2" title="Superficie 2"/>
+                                <g:sortableColumn property="dSuperficie1" title="Superficie 1"/>
+                                <g:sortableColumn property="dSuperficie2" title="Superficie 2"/>
                             </tr>
                         </thead>
                         <tbody>
@@ -96,8 +96,8 @@
                                     <td>${ferianteInstance.parcela}</td>
                                     <td>${ferianteInstance.nombre}</td>
                                     <td>${ferianteInstance.negocio}</td>
-                                    <td>${ferianteInstance.superficie1}</td>
-                                    <td>${ferianteInstance.superficie2}</td>
+                                    <td>${ferianteInstance.dSuperficie1}</td>
+                                    <td>${ferianteInstance.dSuperficie2}</td>
                                 </tr>
                             </g:each>
                         </tbody>

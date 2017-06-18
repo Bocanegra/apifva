@@ -53,8 +53,8 @@
                         <g:sortableColumn property="poblacion" title="Población"/>
                         <g:sortableColumn property="provincia" title="Provincia"/>
                         <g:sortableColumn property="telefono" title="Teléfono"/>
-                        <g:sortableColumn property="superficie1" title="Sup 1"/>
-                        <g:sortableColumn property="superficie2" title="Sup 2"/>
+                        <g:sortableColumn property="dSuperficie1" title="Sup 1"/>
+                        <g:sortableColumn property="dSuperficie2" title="Sup 2"/>
                     </tr>
                     </thead>
                     <tbody>
@@ -68,8 +68,8 @@
                             <td>${feriante.poblacion}</td>
                             <td>${feriante.provincia}</td>
                             <td>${feriante.telefono}</td>
-                            <td>${feriante.superficie1}</td>
-                            <td>${feriante.superficie2}</td>
+                            <td>${feriante.dSuperficie1}</td>
+                            <td>${feriante.dSuperficie2}</td>
                         </tr>
                     </g:each>
                     </tbody>

@@ -18,7 +18,7 @@
     <g:if test="${flash.message}">
         <div class="message" role="status">${flash.message}</div>
     </g:if>
-    <f:table collection="${ferianteList}" properties="['parcela', 'nombre', 'negocio', 'superficie1', 'superficie2']"/>
+    <f:table collection="${ferianteList}" properties="['parcela', 'nombre', 'negocio', 'dSuperficie1', 'dSuperficie2']"/>
 
     <div class="pagination">
         <g:paginate total="${ferianteCount ?: 0}"/>

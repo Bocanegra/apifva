@@ -25,39 +25,46 @@
                     <div class="message" role="status">${flash.message}</div>
                 </g:if>
 
-                <g:form controller="informes">
-                    <div align="center">
-                        <g:hiddenField name="tipo" value="ETIQUETAS"/>
-                        <g:hiddenField name="socios" value="1"/>
-                        <g:actionSubmit action="generar" value="Generar"/>
-                    </div>
+                <div align="center">
+
+                    <g:form controller="listados">
+                        <g:actionSubmit action="socios" value="Listado de Socios"/>
+                    </g:form>
                     <br/>
 
-                    <table>
-                        <thead>
-                            <tr>
-                                <th width="2"><g:field name="todos" type="button" value="Todos" onclick="checkAll()"/></th>
-                                <g:sortableColumn property="numeroSocio" title="Número Socio"/>
-                                <g:sortableColumn property="nombre" title="Nombre"/>
-                                <g:sortableColumn property="poblacion" title="Población"/>
-                                <g:sortableColumn property="provincia" title="Provincia"/>
-                                <g:sortableColumn property="movil1" title="Teléfono móvil"/>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <g:each in="${sociosList}" status="i" var="socio">
-                                <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
-                                    <td><g:field type="checkbox" name="feriantes" value="${socio.id}"/></td>
-                                    <td>${socio.numeroSocio}</td>
-                                    <td>${socio.nombre}</td>
-                                    <td>${socio.poblacion}</td>
-                                    <td>${socio.provincia}</td>
-                                    <td>${socio.movil1}</td>
+                    <g:form controller="informes">
+                        <g:hiddenField name="tipo" value="ETIQUETAS"/>
+                        <g:hiddenField name="socios" value="1"/>
+                        <g:actionSubmit action="generar" value="Etiquetas"/>
+                        <br/>
+                        <br/>
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th width="2"><g:field name="todos" type="button" value="Todos" onclick="checkAll()"/></th>
+                                    <g:sortableColumn property="numeroSocio" title="Número Socio"/>
+                                    <g:sortableColumn property="nombre" title="Nombre"/>
+                                    <g:sortableColumn property="poblacion" title="Población"/>
+                                    <g:sortableColumn property="provincia" title="Provincia"/>
+                                    <g:sortableColumn property="movil1" title="Teléfono móvil"/>
                                 </tr>
-                            </g:each>
-                        </tbody>
-                    </table>
-                </g:form>
+                            </thead>
+                            <tbody>
+                                <g:each in="${sociosList}" status="i" var="socio">
+                                    <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
+                                        <td><g:field type="checkbox" name="feriantes" value="${socio.id}"/></td>
+                                        <td>${socio.numeroSocio}</td>
+                                        <td>${socio.nombre}</td>
+                                        <td>${socio.poblacion}</td>
+                                        <td>${socio.provincia}</td>
+                                        <td>${socio.movil1}</td>
+                                    </tr>
+                                </g:each>
+                            </tbody>
+                        </table>
+                    </g:form>
+                </div>
 
             </section>
         </div>

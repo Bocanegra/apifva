@@ -35,7 +35,7 @@
     <body>
 
         <div id="list-feriante" class="content scaffold-list" role="main">
-            <h1 class="center">Listado de Feriantes</h1>
+            <h1 class="center">Listado de Feriantes ${year}</h1>
             <div>
                 <table class="table" width="100%">
                     <thead>

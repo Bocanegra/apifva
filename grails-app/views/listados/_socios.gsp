@@ -10,7 +10,10 @@
 
         <style type="text/css">
         @page {
-            size: 210mm 297mm;
+            size: 297mm 210mm;
+            @bottom-center {
+                content: counter(page);
+            }
         }
         @font-face {
             font-family: "Helvetica Neue";
@@ -27,24 +30,27 @@
     <body>
 
         <div id="list-feriante" class="content scaffold-list" role="main">
-            <h1>Listado de Feriantes ${year}</h1>
+            <h1>Listado de Socios ${Calendar.instance.get(Calendar.YEAR).toString()}</h1>
             <div>
                 <table class="table" width="100%">
                     <thead>
                         <tr>
-                            <g:each in="['Parcela', 'Nombre', 'Tipo negocio', 'Superficie 1', 'Superficie 2']" var="cabecera">
+                            <g:each in="['Socio', 'Nombre', 'Dirección', 'Población', 'Provincia', 'Teléfono fijo', 'Móvil', 'Email']" var="cabecera">
                                 <th>${cabecera}</th>
                             </g:each>
                         </tr>
                     </thead>
                     <tbody>
-                        <g:each in="${ferianteList}" var="feriante" status="i">
+                        <g:each in="${sociosList}" var="socio" status="i">
                             <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-                                <td>${feriante.parcela}</td>
-                                <td>${feriante.nombre}</td>
-                                <td>${feriante.negocio}</td>
-                                <td>${feriante.dSuperficie1}</td>
-                                <td>${feriante.dSuperficie2}</td>
+                                <td>${socio.numeroSocio}</td>
+                                <td>${socio.nombre}</td>
+                                <td>${socio.direccion}</td>
+                                <td>${socio.codigoPostal}-${socio.poblacion}</td>
+                                <td>${socio.provincia}</td>
+                                <td>${socio.telefonoFijo}</td>
+                                <td>${socio.movil1}</td>
+                                <td>${socio.email}</td>
                             </tr>
                         </g:each>
                     </tbody>

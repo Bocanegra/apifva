@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+<%@ page import="org.springframework.web.servlet.support.RequestContextUtils" %>
+
+<g:set var="locale" value="es_ES"/>
+
 <html>
     <head>
         <meta name="layout" content="main" />
@@ -29,7 +33,43 @@
             <g:form resource="${this.feriante}" method="PUT">
                 <g:hiddenField name="version" value="${this.feriante?.version}" />
                 <fieldset class="form">
-                    <f:all bean="feriante"/>
+                    <f:field property="anyo" bean="feriante"/>
+                    <f:field property="parcela" bean="feriante"/>
+                    <f:field property="nombre" bean="feriante"/>
+                    <f:field property="negocio" bean="feriante"/>
+                    <f:field property="direccion" bean="feriante"/>
+                    <f:field property="codigoPostal" bean="feriante"/>
+                    <f:field property="poblacion" bean="feriante"/>
+                    <f:field property="provincia" bean="feriante"/>
+                    <f:field property="telefono" bean="feriante"/>
+                    <div class="fieldcontain">
+                        <label for="dSuperficie1">Superficie 1 (m2)</label>
+                        <g:field type="text" name="dSuperficie1" value="${feriante.formatSuperficie1()}" id="dSuperficie1"/>
+                    </div>
+                    <div class="fieldcontain">
+                        <label for="dPrecio1">Precio sup 1</label>
+                        <g:field type="text" name="dPrecio1" value="${feriante.formatPrecio1()}" id="dPrecio1"/>
+                    </div>
+                    <div class="fieldcontain">
+                        <label for="dSuperficie2">Superficie 2 (m2)</label>
+                        <g:field type="text" name="dSuperficie2" value="${feriante.formatSuperficie2()}" id="dSuperficie2"/>
+                    </div>
+                    <div class="fieldcontain">
+                        <label for="dPrecio2">Precio sup 2</label>
+                        <g:field type="text" name="dPrecio2" value="${feriante.formatPrecio2()}" id="dPrecio2"/>
+                    </div>
+                    <f:field property="gastos" bean="feriante"/>
+                    <f:field property="luzAgua" bean="feriante"/>
+                    <f:field property="vivienda" bean="feriante"/>
+                    <f:field property="maquinas" bean="feriante"/>
+                    <f:field property="deuda" bean="feriante"/>
+                    <f:field property="sancion" bean="feriante"/>
+                    <f:field property="motivoSancion" bean="feriante"/>
+                    <f:field property="fianza" bean="feriante"/>
+                    <f:field property="pagado" bean="feriante"/>
+                    <f:field property="dni" bean="feriante"/>
+                    <f:field property="email" bean="feriante"/>
+                    <f:field property="IBAN" bean="feriante"/>
                 </fieldset>
                 <fieldset class="buttons">
                     <input class="save" type="submit" value="${message(code: 'default.button.update.label', default: 'Update')}" />

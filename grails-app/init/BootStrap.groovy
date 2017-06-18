@@ -4,6 +4,7 @@ import feriantes_grails.*
 class BootStrap {
 
     static numeroUsers = 6
+    def grailsApplication
 
     def init = { servletContext ->
 
@@ -33,6 +34,23 @@ class BootStrap {
                 it.flush()
                 it.clear()
             }
+        }
+
+        // CAMBIOS Y ADAPTACIONES ENTRE VERSIONES
+        def version = grailsApplication.metadata.getApplicationVersion()
+        log.fatal("App version: ${version}")
+        if (version == "1.2.2") {
+            // v1.2.2: Cambios de precio y metros a Double, para poder meter decimales
+            // - Se crean nuevas variables, y al arrancar se copia lo que hubiera en las antiguas
+            log.fatal("Migration [1] in progress...")
+            Feriante.list().each { feriante ->
+                feriante.dSuperficie1 = feriante.superficie1
+                feriante.dPrecio1 = feriante.precio1
+                feriante.dSuperficie2 = feriante.superficie2
+                feriante.dPrecio2 = feriante.precio2
+                feriante.save()
+            }
+            log.fatal("Migration [1] finished")
         }
 
     }

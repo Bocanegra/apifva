@@ -61,7 +61,7 @@
                     <g:each in="${ferianteList}" var="feriante" status="i">
                         <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
                             <td><g:link action="show" id="${feriante.id}">${feriante.nombre}</g:link></td>
-                            <td>${feriante.anyo}</td>
+                            <td><g:link action="show" id="${feriante.id}">${feriante.anyo}</g:link></td>
                             <td>${feriante.parcela}</td>
                             <td>${feriante.negocio}</td>
                             <td>${feriante.direccion}</td>

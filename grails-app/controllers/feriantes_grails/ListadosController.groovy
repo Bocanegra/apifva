@@ -62,7 +62,8 @@ class ListadosController {
         def year = params.anyo ?: Calendar.instance.get(Calendar.YEAR).toString()
         pdfRenderingService.render([controller: 'listados',
                                     template: 'iban',
-                                    model:[ferianteList: feriantesAnuales(year)]
+                                    model:[ferianteList: feriantesAnuales(year),
+                                           year: year]
         ], response)
     }
 
@@ -81,7 +82,8 @@ class ListadosController {
         pdfRenderingService.render([controller: 'listados',
                                     template: 'personalizado',
                                     model:[ferianteList: feriantesAnuales(year),
-                                           fieldList: campos_on.keySet()]
+                                           fieldList: campos_on.keySet(),
+                                           year: year]
         ], response)
     }
 

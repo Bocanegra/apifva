@@ -110,7 +110,7 @@
                                     <span>Barrio</span>
                                 </td>
                                 <td>
-                                    <g:select name="lugar" from="${lugares}" onchange="updateDoc()"/><br/>
+                                    <g:select name="lugar" from="${lugares}" value="${lugar}" onchange="updateDoc()"/><br/>
                                 </td>
                             </tr>
 

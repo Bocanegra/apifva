@@ -28,6 +28,7 @@ class BarriosController {
             def barrio = Barrio.get(params.barrio)
             render(view: "index", model:[sociosList: listaSocios,
                                          lugares: obtenerDistintosLugares(),
+                                         lugar: barrio.lugar,
                                          ubicacion: barrio.ubicacion,
                                          montaje: barrio.fechaMontaje,
                                          apertura: barrio.fechaApertura,

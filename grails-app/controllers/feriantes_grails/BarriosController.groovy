@@ -21,7 +21,7 @@ class BarriosController {
     def springSecurityService
     def accesoService
 
-    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE'])
+    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE', 'ROLE_VOCAL'])
     def index() {
         def listaSocios = Socio.list(sort:"numeroSocio", order:"asc")
         if (params.barrio) {
@@ -33,7 +33,8 @@ class BarriosController {
                                          apertura: barrio.fechaApertura,
                                          desmontaje: barrio.fechaDesmontaje,
                                          sociosTxt: barrio.socios,
-                                         nosociosTxt: barrio.nosocios])
+                                         nosociosTxt: barrio.nosocios,
+                                         apuntesTxt: barrio.apuntes])
 
         } else {
             render(view: "index", model:[sociosList: listaSocios,
@@ -111,6 +112,7 @@ class BarriosController {
         barrio.fechaDesmontaje = params.desmontaje
         barrio.socios = params.socios
         barrio.nosocios = params.nosocios
+        barrio.apuntes = params.apuntes
 //        def planoFile = request.getFile("plano")
 //        barrios.planoFilename = planoFile.originalFilename
 //        barrios.planoFiledata = planoFile.getBytes()
@@ -164,13 +166,13 @@ class BarriosController {
     //
     // Scafolding
     //
-    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE'])
+    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE', 'ROLE_VOCAL'])
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond Barrio.list(params), model:[barrioCount: Barrio.count()]
     }
 
-    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE'])
+    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE', 'ROLE_VOCAL'])
     def show(Barrio barrio) {
         respond barrio
     }
@@ -252,7 +254,7 @@ class BarriosController {
         }
     }
 
-    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE'])
+    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE', 'ROLE_VOCAL'])
     protected void notFound() {
         request.withFormat {
             form multipartForm {

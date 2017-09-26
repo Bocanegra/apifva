@@ -16,14 +16,14 @@ class SocioController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
-    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE'])
+    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE', 'ROLE_VOCAL'])
     def index(Integer max) {
         params.max = Math.min(max ?: 50, 100)
         params.sort = 'numeroSocio'
         respond Socio.list(params), model:[socioCount: Socio.count()]
     }
 
-    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE'])
+    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE', 'ROLE_VOCAL'])
     def show(Socio socio) {
         respond socio
     }
@@ -114,7 +114,7 @@ class SocioController {
         }
     }
 
-    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE'])
+    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE', 'ROLE_VOCAL'])
     protected void notFound() {
         request.withFormat {
             form multipartForm {

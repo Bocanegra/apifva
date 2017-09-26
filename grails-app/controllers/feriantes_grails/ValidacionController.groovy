@@ -11,7 +11,7 @@ class ValidacionController {
     def springSecurityService
     def accesoService
 
-    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE', 'ROLE_GESTORIA'])
+    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE', 'ROLE_GESTORIA', 'ROLE_VOCAL'])
     def index() {
         // Comprobar si hay alguna de este año
         def list = obtenerDocumentaciones()

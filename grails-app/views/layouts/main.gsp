@@ -27,7 +27,7 @@
                     <a class="navbar-brand" href="/#">
                         <i class="fa grails-icon">
                             <asset:image src="logo.jpg"/>
-                        </i> Asociación de Industriales Feriantes
+                        </i> Asociación de Industriales Feriantes - <sec:username/>
                     </a>
                 </div>
                 <div class="navbar-collapse collapse" aria-expanded="false" style="height: 0.8px;">

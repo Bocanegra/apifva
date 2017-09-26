@@ -146,6 +146,18 @@
                             </tr>
 
                             <tr>
+                                <td colspan="3">
+                                    <span>Apuntes (NO SE IMPRIMEN EN EL DOCUMENTO)</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <g:textArea name="apuntes" value="${apuntesTxt}" rows="5"
+                                                class="barrios_text_area"/>
+                                </td>
+                            </tr>
+
+                            <tr>
                                 <td>
                                     <span>Plano de la Feria</span>
                                 </td>

@@ -15,14 +15,14 @@ class ListadosController {
     def springSecurityService
     def accesoService
 
-    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE'])
+    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE', 'ROLE_VOCAL'])
     def index() {
         def ferianteBean = Holders.applicationContext.getBean("feriantes_grails.Feriante")
         def properties = ferianteBean.properties.keySet().grep { it != "anyo" }.sort()
         render(view: "index", model:[properties:properties])
     }
 
-    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE'])
+    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE', 'ROLE_VOCAL'])
     def ayuntamiento() {
         accesoService.crearAcceso(Tipo.TipoCrear, Recurso.RecursoDocumentos, springSecurityService.currentUser, "Listado ayto.")
         if (params.download) {
@@ -37,7 +37,7 @@ class ListadosController {
         ], response)
     }
 
-    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE'])
+    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE', 'ROLE_VOCAL'])
     def impresion() {
         accesoService.crearAcceso(Tipo.TipoCrear, Recurso.RecursoDocumentos, springSecurityService.currentUser, "Listado impresión")
         if (params.download) {
@@ -52,7 +52,7 @@ class ListadosController {
         ], response)
     }
 
-    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE'])
+    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE', 'ROLE_VOCAL'])
     def pago() {
         accesoService.crearAcceso(Tipo.TipoCrear, Recurso.RecursoDocumentos, springSecurityService.currentUser, "Listado IBAN")
         if (params.download) {
@@ -67,7 +67,7 @@ class ListadosController {
         ], response)
     }
 
-    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE'])
+    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE', 'ROLE_VOCAL'])
     def personalizado() {
         accesoService.crearAcceso(Tipo.TipoCrear, Recurso.RecursoDocumentos, springSecurityService.currentUser, "Listado personalizado")
         if (params.download) {
@@ -87,14 +87,14 @@ class ListadosController {
         ], response)
     }
 
-    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE'])
+    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE', 'ROLE_VOCAL'])
     def socios() {
         accesoService.crearAcceso(Tipo.TipoCrear, Recurso.RecursoDocumentos, springSecurityService.currentUser, "Listado Socios")
         response.contentType = "application/pdf"
         response.setHeader "Content-disposition", "attachment; filename=socios.pdf"
         pdfRenderingService.render([controller: 'listados',
                                     template: 'socios',
-                                    model:[sociosList: Socio.findAll()]
+                                    model:[sociosList: Socio.findAll([sort: 'numeroSocio'])]
         ], response)
     }
 

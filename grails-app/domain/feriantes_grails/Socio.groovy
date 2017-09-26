@@ -46,8 +46,8 @@ class Socio {
     String toString() {
         def descrip = "[${numeroSocio}]-${nombre?:""}"
         if (negocios) {
-            negocios.split("\n").each {
-                descrip += "\n\t- "+it
+            negocios.split("\r\n").each {
+                descrip += "\r\n\t- "+it
             }
         }
         return descrip

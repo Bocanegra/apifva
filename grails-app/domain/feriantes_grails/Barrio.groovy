@@ -10,12 +10,14 @@ class Barrio {
     String fechaDesmontaje
     String socios
     String nosocios
+    String apuntes
     String planoFilename
     byte[] planoFiledata
 
     static mapping = {
         socios sqlType: 'varchar(5000)'
         nosocios sqlType: 'varchar(5000)'
+        apuntes sqlType: 'varchar(5000)'
     }
 
     static constraints = {
@@ -27,6 +29,7 @@ class Barrio {
         fechaDesmontaje (nullable:true)
         socios (nullable:true)
         nosocios (nullable:true)
+        apuntes (nullable:true)
         planoFilename (nullable:true)
         planoFiledata (nullable:true, maxSize:1073741824)
     }

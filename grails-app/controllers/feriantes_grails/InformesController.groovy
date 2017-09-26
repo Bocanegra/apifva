@@ -14,18 +14,18 @@ class InformesController {
     def springSecurityService
     def accesoService
 
-    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE'])
+    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE', 'ROLE_VOCAL'])
     def index() {
         def feriantes = feriantesAnuales()
         render(view:"index", model:["ferianteList": feriantes])
     }
 
-    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE'])
+    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE', 'ROLE_VOCAL'])
     def socios() {
         render(view:"socios", model:["sociosList": Socio.list()])
     }
 
-    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE'])
+    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE', 'ROLE_VOCAL'])
     def generar() {
         if (params.tipo && params.feriantes) {
             accesoService.crearAcceso(Tipo.TipoCrear, Recurso.RecursoInformes, springSecurityService.currentUser, params.tipo)

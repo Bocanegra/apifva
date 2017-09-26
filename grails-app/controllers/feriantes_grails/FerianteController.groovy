@@ -17,7 +17,7 @@ class FerianteController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
-    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE', 'ROLE_GESTORIA'])
+    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE', 'ROLE_GESTORIA', 'ROLE_VOCAL'])
     def index() {
         // Comprobamos el usuario de la gestoría para redireccionarle
         springSecurityService.authentication.authorities.each {
@@ -74,7 +74,7 @@ class FerianteController {
         redirect(action: "list")
     }
 
-    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE'])
+    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE', 'ROLE_VOCAL'])
     def list() {
         def year = params.anyo ?: Calendar.instance.get(Calendar.YEAR).toString()
         def paramOrdered = params + [sort: 'parcela']
@@ -82,7 +82,7 @@ class FerianteController {
                 model:[anyos: obtenerDistintosAnyos(), ferianteList: Feriante.findAllByAnyo(year, paramOrdered)])
     }
 
-    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE'])
+    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE', 'ROLE_VOCAL'])
     def show(Feriante feriante) {
         respond feriante
     }
@@ -171,7 +171,7 @@ class FerianteController {
         }
     }
 
-    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE'])
+    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE', 'ROLE_VOCAL'])
     protected void notFound() {
         request.withFormat {
             form multipartForm {

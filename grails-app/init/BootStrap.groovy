@@ -53,6 +53,13 @@ class BootStrap {
             log.fatal("Migration [1] finished")
         }
 
+        if (version == "1.3.0") {
+            // v1.3.1: Añadir nuevo rol "Vocal"
+            log.fatal("Migration [2] in progress...")
+            new Role(authority: 'ROLE_VOCAL').save(flush: true)
+            log.fatal("Migration [2] finished")
+        }
+
     }
 
     def destroy = {

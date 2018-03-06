@@ -70,11 +70,16 @@ class Feriante {
         pagado (nullable:true)
         email (email:true, nullable:true)
         IBAN (nullable:true)
-        documentacion (nullable:true, cascade: 'all-delete-orphan')
+        documentacion (nullable:true)
     }
 
     static mapping = {
         table 'Feriantes'
+    }
+
+    @Override
+    String toString() {
+        return "${parcela}-[${anyo}]-${nombre?:""}"
     }
 
     def beforeUpdate() {
@@ -129,11 +134,6 @@ class Feriante {
 
     int getPendiente() {
         total - (pagado ? pagado : 0)
-    }
-
-    @Override
-    String toString() {
-        return "${parcela}-[${anyo}]-${nombre?:""}"
     }
 
     String formatSuperficie1() {

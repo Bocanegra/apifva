@@ -30,8 +30,7 @@ class Documentacion {
     Date f_dni
     Date f_solicitud
 
-//    Feriante feriante
-    static belongsTo = [feriante:Feriante]
+    static belongsTo = [feriante: Feriante]
 
     static constraints = {
         anyo (nullable:false)

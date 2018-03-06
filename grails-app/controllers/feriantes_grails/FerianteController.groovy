@@ -47,6 +47,7 @@ class FerianteController {
             Feriante.findAllByAnyo(params.anyo).each { oldFeriante ->
                 def newFeriante = new Feriante(oldFeriante.properties)
                 newFeriante.anyo = anyoActual
+                newFeriante.documentacion = null
                 newFeriante.save(flush:true)
                 log.error("Creado Feriante ${newFeriante}")
             }
@@ -61,11 +62,19 @@ class FerianteController {
     def deleteFeriantes() {
         if (params.anyo) {
             accesoService.crearAcceso(Tipo.TipoBorrar, Recurso.RecursoFeriantes, springSecurityService.currentUser, params.anyo)
-            Feriante.findAllByAnyo(params.anyo).each {
+            Documentacion.findAllByAnyo(params.anyo).each { doc ->
                 try {
-                    it.delete(flush: true)
+                    doc.delete(flush: true)
                 } catch (DataIntegrityViolationException e) {
-                    log.error("No se ha podido eliminar ${it}")
+                    log.error("No se ha podido eliminar ${doc}")
+                }
+            }
+            Feriante.findAllByAnyo(params.anyo).each { feriante ->
+                try {
+                    feriante.documentacion = null
+                    feriante.delete(flush: true)
+                } catch (DataIntegrityViolationException e) {
+                    log.error("No se ha podido eliminar ${feriante}")
                 }
             }
         } else {
@@ -140,7 +149,7 @@ class FerianteController {
         }
 
         accesoService.crearAcceso(Tipo.TipoModificar, Recurso.RecursoFeriantes, springSecurityService.currentUser, feriante.id)
-        feriante.save flush:true
+        feriante.save(flush: true)
 
         request.withFormat {
             form multipartForm {

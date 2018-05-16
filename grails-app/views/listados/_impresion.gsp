@@ -48,6 +48,22 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <%
+                            Integer totalSup1 = 0
+                            Integer totalSup2 = 0
+                            Integer totalSitio = 0
+                            Integer totalGastos = 0
+                            Integer totalLuz = 0
+                            Integer totalVivienda = 0
+                            Integer totalMaquinas = 0
+                            Integer totalDeuda = 0
+                            Integer totalSanciones = 0
+                            Integer totalPago1 = 0
+                            Integer totalPago2 = 0
+                            Integer totalTotal = 0
+                            Integer totalFianza = 0
+                            Integer totalPdte = 0
+                        %>
                         <g:each in="${ferianteList}" var="feriante" status="i">
                             <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
                                 <td>${feriante.parcela}</td>
@@ -70,7 +86,53 @@
                                 <td>${feriante.fianza}</td>
                                 <td>${feriante.pendiente}</td>
                             </tr>
+                            <%
+                                totalSup1       += feriante.dSuperficie1 ?: 0
+                                totalSup2       += feriante.dSuperficie2 ?: 0
+                                totalSitio      += feriante.sitio ?: 0
+                                totalGastos     += feriante.gastos ?: 0
+                                totalLuz        += feriante.luzAgua ?: 0
+                                totalVivienda   += feriante.vivienda ?: 0
+                                totalMaquinas   += feriante.maquinas ?: 0
+                                totalDeuda      += feriante.deuda ?: 0
+                                totalSanciones  += feriante.sancion ?: 0
+                                totalPago1      += feriante.pago1 ?: 0
+                                totalPago2      += feriante.pago2 ?: 0
+                                totalTotal      += feriante.total ?: 0
+                                totalFianza     += feriante.fianza ?: 0
+                                totalPdte       += feriante.pendiente ?: 0
+                            %>
                         </g:each>
+
+                        <!-- Totales -->
+                        <tr class="even">
+                            <td></td>
+                            <td>TOTALES</td>
+                            <td></td>
+                            <td>${totalSup1}</td>
+                            <td></td>
+                            <td>${totalSup2}</td>
+                            <td></td>
+                            <td>${totalSitio}</td>
+                            <td>${totalGastos}</td>
+                            <td>${totalLuz}</td>
+                            <td>${totalVivienda}</td>
+                            <td>${totalMaquinas}</td>
+                            <td>${totalDeuda}</td>
+                            <td>${totalSanciones}</td>
+                            <td>${totalPago1}</td>
+                            <td>${totalPago2}</td>
+                            <td>${totalTotal}</td>
+                            <td>${totalFianza}</td>
+                            <td>${totalPdte}</td>
+                        </tr>
+                        <tr class="even">
+                            <g:each in="[' ', 'Nombre', 'Negocio', 'Sup 1', 'Precio 1', 'Sup 2',
+                                         'Precio 2', 'Sitio', 'Gastos', 'Luz-agua', 'Vivienda', 'Máquinas', 'Deuda', 'Sanción',
+                                         'Pago 1', 'Pago 2', 'Total', 'Fianza', 'Pdte.']" var="cabecera">
+                                <td>${cabecera}</td>
+                            </g:each>
+                        </tr>
                     </tbody>
                 </table>
             </div>

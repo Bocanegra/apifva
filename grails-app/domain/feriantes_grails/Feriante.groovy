@@ -13,10 +13,6 @@ class Feriante {
     String poblacion
     String provincia
     String telefono
-//    Integer superficie1 = 0
-//    Integer precio1 = 0
-//    Integer superficie2 = 0
-//    Integer precio2 = 0
     Double dSuperficie1 = 0.0
     Double dPrecio1 = 0.0
     Double dSuperficie2 = 0.0
@@ -50,14 +46,10 @@ class Feriante {
         poblacion (nullable:true)
         provincia (nullable:true)
         telefono (nullable:true)
-//        superficie1 (nullable:true)
-//        precio1 (nullable:true)
-//        superficie2 (nullable:true)
-//        precio2 (nullable:true)
-        dSuperficie1 (nullable:true)
-        dPrecio1 (nullable:true)
-        dSuperficie2 (nullable:true)
-        dPrecio2 (nullable:true)
+        dSuperficie1 (nullable:false, blank: false)
+        dPrecio1 (nullable:false, blank: false)
+        dSuperficie2 (nullable:false, blank: false)
+        dPrecio2 (nullable:false, blank: false)
         dni (nullable:true)
         gastos (nullable:true)
         luzAgua (nullable:true)

@@ -1,5 +1,6 @@
 package feriantes_grails
 
+import grails.util.Holders
 import org.springframework.dao.DataIntegrityViolationException
 
 import static org.springframework.http.HttpStatus.*
@@ -94,6 +95,27 @@ class FerianteController {
     @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE', 'ROLE_VOCAL'])
     def show(Feriante feriante) {
         respond feriante
+    }
+
+    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE', 'ROLE_VOCAL'])
+    def multiedit() {
+        def ferianteBean = Holders.applicationContext.getBean("feriantes_grails.Feriante")
+        def properties = ferianteBean.properties.keySet().grep { it != "anyo" }.sort()
+        render (view: "multiedit", model:[anyos: obtenerDistintosAnyos(), properties: properties])
+    }
+
+    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE', 'ROLE_VOCAL'])
+    def multiedited() {
+        def year = params.anyo ?: Calendar.instance.get(Calendar.YEAR).toString()
+        Map campos_on = params.findAll { param ->
+            param.key in Holders.applicationContext.getBean("feriantes_grails.Feriante").properties.keySet() && param.value != ""
+        }
+        campos_on.remove("anyo")
+        Feriante.findAllByAnyo(year).each { feriante ->
+            feriante.properties = campos_on
+            feriante.save(flush: true)
+        }
+        redirect(action: "list")
     }
 
     @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE'])

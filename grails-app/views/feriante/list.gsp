@@ -35,6 +35,7 @@
             <ul class="nav">
                 <li><a class="home" href="${createLink(uri: '/')}">Inicio</a></li>
                 <li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]"/></g:link></li>
+                <li><g:link class="create" action="multiedit">Cambio masivo de datos</g:link></li>
             </ul>
 
             <div id="list-feriante" class="content scaffold-list" role="main">

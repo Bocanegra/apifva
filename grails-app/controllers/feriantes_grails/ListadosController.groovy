@@ -19,7 +19,7 @@ class ListadosController {
     def index() {
         def ferianteBean = Holders.applicationContext.getBean("feriantes_grails.Feriante")
         def properties = ferianteBean.properties.keySet().grep { it != "anyo" }.sort()
-        render(view: "index", model:[properties:properties])
+        render(view: "index", model:[anyos: obtenerDistintosAnyos(), properties:properties])
     }
 
     @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE', 'ROLE_VOCAL'])
@@ -101,12 +101,15 @@ class ListadosController {
     public static def feriantesAnuales(year) {
         return Feriante.findAllByAnyo(year, [sort: 'parcela'])
     }
-}
 
-//        new File("ayuntamiento.pdf").withOutputStream { outputStream ->
-//            pdfRenderingService.render([controller: 'listados',
-//                                        template: 'ayuntamiento',
-//                                        model:[ferianteList: Feriante.list()]
-//            ], response)
-//        }
-//        render (template: 'ayuntamiento', model:[ferianteList: Feriante.list()])
+    // Obtiene de la base de datos de Feriantes todos los años distintos con algún Feriante
+    private static def obtenerDistintosAnyos() {
+        def results = Feriante.withCriteria {
+            projections {
+                distinct("anyo")
+            }
+        }
+        return results
+    }
+
+}

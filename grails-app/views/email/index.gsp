@@ -27,6 +27,7 @@
                 <ul class="buttons">
                     <li class="controller"><g:link action="informativo">1. Documento informativo</g:link></li>
                     <li class="controller"><g:link action="justificante">2. Documento justificante de pago</g:link></li>
+                    <li class="controller"><g:link action="generico">3. Otros mensajes</g:link></li>
                 </ul>
 
             </section>

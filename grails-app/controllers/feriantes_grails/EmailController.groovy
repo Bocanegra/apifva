@@ -27,9 +27,16 @@ class EmailController {
     }
 
     @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE', 'ROLE_VOCAL'])
+    def generico() {
+        def feriantes = feriantesAnualesConEmail()
+        render(view: "/email/generico", model: ["ferianteList": feriantes])
+    }
+
+    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE', 'ROLE_VOCAL'])
     def sendEmails() {
         String template = params.template
         def ids_feriantes = (params.feriantes instanceof String) ? [params.feriantes] : params.feriantes
+        def bodyHtml = params.bodyHtml ?: false
         def year = Calendar.instance.get(Calendar.YEAR).toString()
         int emailsEnviados = 0
         // Se envía un mail a cada feriante con sus datos
@@ -57,8 +64,11 @@ class EmailController {
                 sendMail {
                     to feriante.email
                     subject params.titulo ?: "Ferias Vírgen de San Lorenzo Valladolid ${year}"
-                    text template
-                    //html template -> esto para que coja el body en HTML
+                    if (bodyHtml) {
+                        html template
+                    } else {
+                        text template
+                    }
                 }
                 emailsEnviados++
             } catch (Exception e) {

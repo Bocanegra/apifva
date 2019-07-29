@@ -1,4 +1,4 @@
-<%@ page import="feriantes_grails.Feriante; grails.util.Environment" %>
+<%@ page import="feriantes_grails.TipoInformes; feriantes_grails.Feriante; grails.util.Environment" %>
 <!doctype html>
 <html>
 <head>
@@ -13,6 +13,7 @@
             $("input[type='checkbox']").prop("checked", false);
         }
     </g:javascript>
+    <script src="//cdn.ckeditor.com/4.6.0/full-all/ckeditor.js"></script>
 </head>
 
 <body>
@@ -22,10 +23,10 @@
 
     <div id="content" class="content scaffold-list" role="main">
         <section class="row colset-2-its">
-            <h1>Justificante de pago, año <b>${Calendar.instance.get(Calendar.YEAR)}</b></h1>
-            <p>Revisa la plantilla con el texto a enviar, y selecciona todos los usuarios a los que quieras enviar el email.</p>
-            <p>Los campos entre «...» se rellenan automáticamente. Pulsa "Enviar" cuando esté todo correcto.</p>
-        </p>
+            <h1>Otros comunicados</h1>
+            <p>Aquí se puede enviar un comunicado genérico a determinados feriantes, rellena el título, el cuerpo del mensaje,
+            y selecciona a todas las personas a las que llegará el email.
+            </p>
 
             <g:if test="${flash.message}">
                 <div class="message" role="status">${flash.message}</div>
@@ -34,10 +35,11 @@
             <g:form controller="email">
                 <table>
                     <h2>Título</h2>
-                    <g:textField name="titulo" value="Ferias Vírgen de San Lorenzo Valladolid ${Calendar.instance.get(Calendar.YEAR)} - justificante de pago" class="email_table"/>
+                    <g:textField name="titulo" value="" class="email_table"/>
                     <h2>Mensaje</h2>
-                    <g:textArea id="template" name="template" value="${template}" rows="20" class="email_table"/>
+                    <g:textArea name="template" value="" rows="20" class="email_table"/>
                     <br/>
+                    <g:hiddenField name="bodyHtml" value="true"/>
 
                     <h1 align="center"><g:actionSubmit action="sendEmails" value="Enviar" class="email_buttons"/></h1>
                     <br/>
@@ -76,5 +78,12 @@
 
         </section>
     </div>
+
+    <script>
+        CKEDITOR.replace('template', {
+            extraPlugins: 'codesnippet'
+        });
+    </script>
+
 </body>
 </html>

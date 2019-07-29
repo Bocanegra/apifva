@@ -1,0 +1,18 @@
+FERIA VIRGEN DE SAN LORENZO «Anyo» VALLADOLID
+
+D. «Nombre» ha pagado la cantidad abajo indicada por los siguientes conceptos en la Feria Virgen de San Lorenzo «Anyo» de Valladolid.
+
+Parcela Nº «Parcela»
+«Sup_1» + «Sup_2» metros
+
+* Por sitio:      «Sitio» €
+* Por gastos: 	  «Gastos» €
+* Por luz y agua: «LuzAgua» €
+* Por viviendas:  «Vivienda» €
+* Por máquinas:   «Maquinas» €
+* Por deuda:      «Deuda» €
+* Por sanciones:  «Sanciones» € («MotivoSanciones»)
+
+    Total: «Total» €
+
+INDISPENSABLE ESTE JUSTIFICANTE DE PAGO PARA PODER ENTRAR EN LA FERIA

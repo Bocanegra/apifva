@@ -69,3 +69,14 @@
     -moz-column-count: 3;
     column-count: 3;
 }
+
+.email_table {
+    width: 100%;
+    margin: 0;
+}
+
+.email_buttons {
+    width: 200px;
+    background-color: #31b0d5;
+    color: white;
+}

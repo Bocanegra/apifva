@@ -10,14 +10,11 @@ buildscript {
         classpath "org.grails:grails-gradle-plugin:$grailsVersion"
         classpath "com.bertramlabs.plugins:asset-pipeline-gradle:2.8.2"
         classpath "org.grails.plugins:hibernate4:5.0.6"
+        classpath "io.spring.gradle:dependency-management-plugin:0.6.0.RELEASE"
     }
 }
 
-plugins {
-    id "io.spring.dependency-management" version "0.4.0.RELEASE"
-}
-
-version "1.4.0"
+version "1.5.0"
 group "AsociacionFeriantes"
 
 apply plugin:"spring-boot"
@@ -73,6 +70,7 @@ dependencies {
 //    compile 'org.eclipse.jetty:jetty-runner:9.2.11.v20150529'
     compile 'com.github.jsimone:webapp-runner:8.0.30.2'
 //    runtime 'mysql:mysql-connector-java:5.1.36'
+    compile "org.grails.plugins:mail:2.0.0.RC6"
     // Fin lagm
 
     console "org.grails:grails-console"

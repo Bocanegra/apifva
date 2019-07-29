@@ -105,3 +105,15 @@ grails:
 endpoints:
     jmx:
         unique-names: true
+---
+grails:
+    mail:
+        host: "smtp.gmail.com"
+        port: 465
+        username: "feriantesvalladolid.docs@gmail.com"
+        password: "Feria2020."
+        props:
+            mail.smtp.auth: "true"
+            mail.smtp.socketFactory.port: "465"
+            mail.smtp.socketFactory.class: "javax.net.ssl.SSLSocketFactory"
+            mail.smtp.socketFactory.fallback: "false"

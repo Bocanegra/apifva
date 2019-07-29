@@ -86,6 +86,7 @@
                                 <g:sortableColumn property="negocio" title="Negocio"/>
                                 <g:sortableColumn property="dSuperficie1" title="Superficie 1"/>
                                 <g:sortableColumn property="dSuperficie2" title="Superficie 2"/>
+                                <g:sortableColumn property="email" title="Email"/>
                             </tr>
                         </thead>
                         <tbody>
@@ -98,6 +99,7 @@
                                     <td>${ferianteInstance.negocio}</td>
                                     <td>${ferianteInstance.dSuperficie1}</td>
                                     <td>${ferianteInstance.dSuperficie2}</td>
+                                    <td>${ferianteInstance.email}</td>
                                 </tr>
                             </g:each>
                         </tbody>

@@ -42,7 +42,7 @@
                         <tr class="center header">
                             <g:each in="[' ', 'Nombre', 'Negocio', 'Sup 1', 'Precio 1', 'Sup 2',
                             'Precio 2', 'Sitio', 'Gastos', 'Luz-agua', 'Vivienda', 'Máquinas', 'Deuda', 'Sanción',
-                            'Pago 1', 'Pago 2', 'Total', 'Fianza', 'Pdte.']" var="cabecera">
+                            'Pago 1', 'Pago 2', 'Total', 'Fianza', 'Pagado']" var="cabecera">
                                 <th>${cabecera}</th>
                             </g:each>
                         </tr>
@@ -84,7 +84,7 @@
                                 <td>${feriante.pago2}</td>
                                 <td>${feriante.total}</td>
                                 <td>${feriante.fianza}</td>
-                                <td>${feriante.pendiente}</td>
+                                <td>${feriante.todoPagado ? "--- X ---" : ""}</td>
                             </tr>
                             <%
                                 totalSup1       += feriante.dSuperficie1 ?: 0

@@ -297,6 +297,22 @@ class FerianteController {
         redirect(action:'list', params:[anyo:"0"])
     }
 
+    @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE'])
+    def copiarPropietario(Feriante feriante) {
+        def propietario = Feriante.findByParcelaAndAnyo(feriante.parcela, "0")
+        def anyoFeriante = feriante.anyo
+        if (propietario != null) {
+            feriante.properties = propietario.properties
+            feriante.anyo = anyoFeriante
+            feriante.documentacion = null
+            feriante.save(flush: true)
+            flash.message = "Datos del propietario copiados"
+        } else {
+            flash.error = "Ha ocurrido un error, no hemos encontrado el propietario para la parcela ${parcela} en el año 0"
+        }
+        redirect feriante
+    }
+
     public static def preparaCelda(Cell celda, tipo) {
         if (tipo == Integer) {
             if (celda.type == CellType.LABEL) {

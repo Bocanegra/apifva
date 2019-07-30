@@ -45,7 +45,7 @@
             <section class="row colset-2-its">
                 <h1>Generación de documentación para las Ferias</h1>
 
-                <sec:ifAnyGranted roles='ROLE_ADMIN'>
+                <sec:ifAnyGranted roles='ROLE_ADMIN,ROLE_SECRETARIO'>
                     <g:link action="list">Listado de Barrios</g:link>
                 </sec:ifAnyGranted>
 

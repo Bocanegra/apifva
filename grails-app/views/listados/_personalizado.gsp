@@ -49,7 +49,12 @@
                         <g:each in="${ferianteList}" var="feriante" status="i">
                             <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
                                 <g:each in="${fieldList}" var="campo">
-                                    <td>${feriante[campo]}</td>
+                                    <g:if test="${feriante[campo] instanceof Boolean}">
+                                        <td>${feriante[campo] ? "X" : ""}</td>
+                                    </g:if>
+                                    <g:else>
+                                        <td>${feriante[campo]}</td>
+                                    </g:else>
                                 </g:each>
                             </tr>
                         </g:each>

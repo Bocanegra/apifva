@@ -36,6 +36,7 @@
                     <f:field property="anyo" bean="feriante"/>
                     <f:field property="parcela" bean="feriante"/>
                     <f:field property="nombre" bean="feriante"/>
+                    <f:field property="isPropietario" bean="feriante"/>
                     <f:field property="negocio" bean="feriante"/>
                     <f:field property="direccion" bean="feriante"/>
                     <f:field property="codigoPostal" bean="feriante"/>
@@ -67,6 +68,7 @@
                     <f:field property="motivoSancion" bean="feriante"/>
                     <f:field property="fianza" bean="feriante"/>
                     <f:field property="pagado" bean="feriante"/>
+                    <f:field property="todoPagado" bean="feriante"/>
                     <f:field property="dni" bean="feriante"/>
                     <f:field property="email" bean="feriante"/>
                     <f:field property="IBAN" bean="feriante"/>

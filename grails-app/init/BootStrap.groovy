@@ -60,6 +60,18 @@ class BootStrap {
             log.fatal("Migration [2] finished")
         }
 
+        if (version == "1.5.0") {
+            // v1.5.1: Añadidos campos isPropietario y todoPagado
+            // - Se crean nuevas variables, y al arrancar se asignan valores por defecto
+            log.fatal("Migration [3] in progress...")
+            Feriante.list().each { feriante ->
+                feriante.isPropietario = feriante.anyo == "0"
+                feriante.todoPagado = false
+                feriante.save()
+            }
+            log.fatal("Migration [3] finished")
+        }
+
     }
 
     def destroy = {

@@ -36,6 +36,10 @@ class Feriante {
     Date dateCreated
     Date lastUpdated
 
+    // v1.5.1
+    Boolean isPropietario
+    Boolean todoPagado
+
     static constraints = {
         anyo (nullable:false, blank:false)
         parcela (nullable:false)
@@ -63,6 +67,8 @@ class Feriante {
         email (email:true, nullable:true)
         IBAN (nullable:true)
         documentacion (nullable:true)
+        isPropietario (nullable: true, blank: true)
+        todoPagado (nullable: true, blank: true)
     }
 
     static mapping = {
@@ -142,6 +148,10 @@ class Feriante {
 
     String formatPrecio2() {
         return dPrecio2.toString().replace(".", ",")
+    }
+
+    String propietarioStr() {
+        return isPropietario ? "X" : ""
     }
 
 }

@@ -34,6 +34,10 @@
                     <div class="property-value" aria-labelledby="nombre-label">${feriante.nombre}</div>
                 </li>
                 <li class="fieldcontain">
+                    <span id="propietario-label" class="property-label">Propietario</span>
+                    <div class="property-value" aria-labelledby="propietario-label">${feriante.propietarioStr()}</div>
+                </li>
+                <li class="fieldcontain">
                     <span id="negocio-label" class="property-label">Negocio</span>
                     <div class="property-value" aria-labelledby="negocio-label">${feriante.negocio}</div>
                 </li>
@@ -110,6 +114,10 @@
                     <div class="property-value" aria-labelledby="pagado-label">${feriante.pagado}</div>
                 </li>
                 <li class="fieldcontain">
+                    <span id="todoPagado-label" class="property-label">Todo pagado</span>
+                    <div class="property-value" aria-labelledby="todoPagado-label">${feriante.todoPagado ? "X" : ""}</div>
+                </li>
+                <li class="fieldcontain">
                     <span id="dni-label" class="property-label">DNI</span>
                     <div class="property-value" aria-labelledby="dni-label">${feriante.dni}</div>
                 </li>
@@ -125,8 +133,10 @@
 
             <g:form resource="${this.feriante}" method="DELETE">
                 <fieldset class="buttons">
-                    <g:link class="edit" action="edit" resource="${this.feriante}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-                    <input class="delete" type="submit" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+                    <g:link class="edit" action="edit" resource="${this.feriante}"><g:message code="default.button.edit.label" default="Edit"/></g:link>
+                    <input class="delete" type="submit" value="${message(code: 'default.button.delete.label', default: 'Delete')}"
+                           onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"/>
+                    <g:link class="edit" action="copiarPropietario" resource="${this.feriante}">Copiar datos del propietario original</g:link>
                 </fieldset>
             </g:form>
         </div>

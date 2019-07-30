@@ -5,14 +5,6 @@
     <meta name="layout" content="main"/>
     <title>Asociación de Feriantes de Valladolid</title>
     <asset:link rel="icon" href="favicon.ico" type="image/x-ico"/>
-    <g:javascript>
-        function checkAll() {
-            $("input[type='checkbox']").prop("checked", true);
-        }
-        function checkNone() {
-            $("input[type='checkbox']").prop("checked", false);
-        }
-    </g:javascript>
 </head>
 
 <body>
@@ -38,16 +30,14 @@
                     <h2>Mensaje</h2>
                     <g:textArea id="template" name="template" value="${template}" rows="20" class="email_table"/>
                     <br/>
+                    <g:hiddenField name="justificantePago" value="true"/>
 
                     <h1 align="center"><g:actionSubmit action="sendEmails" value="Enviar" class="email_buttons"/></h1>
                     <br/>
 
                     <thead>
                     <tr>
-                        <th width="2">
-                            <g:field name="todos" type="button" value="Todos" onclick="checkAll()"/><br/>
-                            <g:field name="ninguno" type="button" value="Ninguno" onclick="checkNone()"/>
-                        </th>
+                        <th/>
                         <g:sortableColumn property="anyo" title="Año"/>
                         <g:sortableColumn property="parcela" title="Parcela"/>
                         <g:sortableColumn property="nombre" title="Nombre"/>

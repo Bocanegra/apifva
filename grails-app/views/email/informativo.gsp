@@ -40,7 +40,10 @@
                 <g:textArea name="template" value="${template}" rows="45" class="email_table"/>
                 <br/>
 
-                <h1 align="center"><g:actionSubmit action="sendEmails" value="Enviar" class="email_buttons"/></h1>
+                <h1 align="center">
+                    <g:actionSubmit action="sendEmails" value="Enviar" class="email_buttons"
+                                    onclick="return confirm('¿Procedemos con el envío de los emails?');"/>
+                </h1>
                 <br/>
 
                 <thead>

@@ -49,6 +49,7 @@
                         <g:sortableColumn property="nombre" title="Nombre"/>
                         <g:sortableColumn property="anyo" title="Año"/>
                         <g:sortableColumn property="parcela" title="Parcela"/>
+                        <g:sortableColumn property="isPropietario" title="Propietario"/>
                         <g:sortableColumn property="negocio" title="Negocio"/>
                         <g:sortableColumn property="direccion" title="Dirección"/>
                         <g:sortableColumn property="poblacion" title="Población"/>
@@ -64,6 +65,7 @@
                             <td><g:link action="show" id="${feriante.id}">${feriante.nombre}</g:link></td>
                             <td><g:link action="show" id="${feriante.id}">${feriante.anyo}</g:link></td>
                             <td>${feriante.parcela}</td>
+                            <td>${feriante.isPropietario ? "X" : ""}</td>
                             <td>${feriante.negocio}</td>
                             <td>${feriante.direccion}</td>
                             <td>${feriante.poblacion}</td>

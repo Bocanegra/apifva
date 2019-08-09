@@ -86,8 +86,8 @@ class InformesController {
                 def mappings = creaMappings(feriante, others)
 
                 // Se rellenan todos los campos posibles de las plantillas
-                MailMerger.setMERGEFIELDInOutput(MailMerger.OutputField.KEEP_MERGEFIELD);
-                MailMerger.performMerge(docFeriante, mappings, true);
+                MailMerger.setMERGEFIELDInOutput(MailMerger.OutputField.KEEP_MERGEFIELD)
+                MailMerger.performMerge(docFeriante, mappings, true)
 
                 // Se mezcla con el documento final, excepto la primera vez que cogemos el primer documento
                 if (firstTime) {
@@ -123,8 +123,8 @@ class InformesController {
 
             // Las etiquetas son un caso particular de Merge
             File tmpFile = File.createTempFile("${tipo}-", ".docx")
-            MailMerger.setMERGEFIELDInOutput(MailMerger.OutputField.KEEP_MERGEFIELD);
-            MailMergerWithNext.performLabelMerge(wordMLPackage, list_mappings);
+            MailMerger.setMERGEFIELDInOutput(MailMerger.OutputField.KEEP_MERGEFIELD)
+            MailMergerWithNext.performLabelMerge(wordMLPackage, list_mappings)
             wordMLPackage.save(tmpFile)
             docs.add(tmpFile)
         }

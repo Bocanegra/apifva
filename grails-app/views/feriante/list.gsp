@@ -17,7 +17,7 @@
                 <li class="buttons save">
                     <g:form action="list">
                         Mostrar Feriantes para el año:
-                        <g:select id="anyo" name="anyo" from="${anyos}"/>
+                        <g:select id="anyo" name="anyo" from="${anyos}" value="${year}"/>
                         <g:field name="send" type="submit" value="Filtrar" class="buttons"/>
                     </g:form>
                 </li>
@@ -25,7 +25,7 @@
                     <li class="buttons delete">
                         <g:form action="deleteFeriantes">
                             Eliminar todos los feriantes para el año:
-                            <g:select id="anyo" name="anyo" from="${anyos}"/>
+                            <g:select id="anyo" name="anyo" from="${anyos}" value="${year}"/>
                             <g:field name="send" type="submit" value="Borrar" class="buttons"/>
                         </g:form>
                     </li>

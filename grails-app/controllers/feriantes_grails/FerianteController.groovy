@@ -89,7 +89,9 @@ class FerianteController {
         def year = params.anyo ?: Calendar.instance.get(Calendar.YEAR).toString()
         def paramOrdered = params + [sort: 'parcela']
         render (view: "list",
-                model:[anyos: obtenerDistintosAnyos(), ferianteList: Feriante.findAllByAnyo(year, paramOrdered)])
+                model: [anyos: obtenerDistintosAnyos(),
+                        ferianteList: Feriante.findAllByAnyo(year, paramOrdered),
+                        year: year])
     }
 
     @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE', 'ROLE_VOCAL'])
@@ -99,23 +101,60 @@ class FerianteController {
 
     @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE', 'ROLE_VOCAL'])
     def multiedit() {
+        def year = params.anyo ?: Calendar.instance.get(Calendar.YEAR).toString()
         def ferianteBean = Holders.applicationContext.getBean("feriantes_grails.Feriante")
         def properties = ferianteBean.properties.keySet().grep { it != "anyo" }.sort()
-        render (view: "multiedit", model:[anyos: obtenerDistintosAnyos(), properties: properties])
+        render (view: "multiedit", model:[year: year,
+                                          anyos: obtenerDistintosAnyos(),
+                                          properties: properties,
+                                          ferianteList: Feriante.findAllByAnyo(year, [sort: 'parcela'])])
     }
 
     @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE', 'ROLE_VOCAL'])
     def multiedited() {
         def year = params.anyo ?: Calendar.instance.get(Calendar.YEAR).toString()
+        params.feriantes = (params.feriantes instanceof String) ? [params.feriantes] : params.feriantes
+        def feriantesCambiados = 0
         Map campos_on = params.findAll { param ->
             param.key in Holders.applicationContext.getBean("feriantes_grails.Feriante").properties.keySet() && param.value != ""
         }
         campos_on.remove("anyo")
-        Feriante.findAllByAnyo(year).each { feriante ->
-            feriante.properties = campos_on
+        params.feriantes.each { f_id ->
+            Feriante feriante = Feriante.get(f_id)
+            Map campos_resueltos = [:]
+            campos_on.each {
+                // Se busca en los campos el '%' para posibilitar subir y bajar porcentajes de valores
+                if (it.value instanceof String && it.value.contains("%")) {
+                    def porcentaje = it.value.toString() - "%"
+                    def suma = true
+                    if (porcentaje.contains("-")) {
+                        suma = false
+                        porcentaje -= "-"
+                    } else {
+                        porcentaje -= "+"
+                    }
+                    def porcentajeNum = Float.parseFloat(porcentaje)
+                    def valorActual = feriante[it.key]
+                    if (valorActual instanceof Number) {
+                        if (suma) {
+                            valorActual *= 1.0 + porcentajeNum / 100
+                        } else {
+                            valorActual *= 1.0 - porcentajeNum / 100
+                        }
+                        campos_resueltos.put(it.key, valorActual as Integer)
+                    } else {
+                        log.fatal("Valor no numérico, no lo cambiamos")
+                    }
+                } else {
+                    campos_resueltos.put(it.key, it.value)
+                }
+            }
+            feriante.properties = campos_resueltos
             feriante.save(flush: true)
+            feriantesCambiados += 1
         }
-        redirect(action: "list")
+        flash.message = "Datos de Feriantes cambiados: ${feriantesCambiados}"
+        redirect(action: "multiedit")
     }
 
     @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE'])
@@ -313,7 +352,7 @@ class FerianteController {
         redirect feriante
     }
 
-    public static def preparaCelda(Cell celda, tipo) {
+    static def preparaCelda(Cell celda, tipo) {
         if (tipo == Integer) {
             if (celda.type == CellType.LABEL) {
                 return Integer.parseInt(((LabelCell)celda).string)
@@ -333,7 +372,7 @@ class FerianteController {
         }
     }
 
-    public static def feriantesAnuales() {
+    static def feriantesAnuales() {
         // Comprobar si ya se han creado los feriantes de este año
         def year = Calendar.instance.get(Calendar.YEAR).toString()
         return Feriante.findByAnyo(year)
@@ -346,7 +385,7 @@ class FerianteController {
                 distinct("anyo")
             }
         }
-        return results
+        return results.sort()
     }
 
 }

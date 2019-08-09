@@ -379,7 +379,7 @@ class FerianteController {
     }
 
     // Obtiene de la base de datos de Feriantes todos los años distintos con algún Feriante
-    private static def obtenerDistintosAnyos() {
+    public static def obtenerDistintosAnyos() {
         def results = Feriante.withCriteria {
             projections {
                 distinct("anyo")

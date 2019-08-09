@@ -29,7 +29,13 @@
 
         <div id="content" class="content scaffold-list" role="main">
             <section class="row colset-2-its">
-                <h1>Generación de informes año <b>${Calendar.instance.get(Calendar.YEAR)}</b></h1>
+                <h1>Generación de informes año <b>${year}</b></h1>
+                <p align="center">
+                    <g:form action="index" align="center">
+                        <h3>Mostrar Feriantes del año <g:select id="anyo" name="anyo" from="${anyos}" value="${year}"/> <g:submitButton name="multieditLoad" value="Cargar"/></h3>
+                    </g:form>
+                </p>
+                <br/>
                 <p>
                     Elige el tipo de informe y selecciona a todos los usuarios para los que haya que generarlo, y pulsa
                     en el botón "Generar".
@@ -43,7 +49,7 @@
                     <div align="center">
                         <g:select id="tipo_informe" name="tipo" from="${TipoInformes.values()}" value="${TipoInformes}"
                                   optionKey="key" onchange="showPagoOpts()"/>
-                        <g:actionSubmit action="generar" value="Generar"/>
+                        <g:actionSubmit action="generar" value="Generar" class="email_buttons"/>
                     </div>
                     <br/>
 

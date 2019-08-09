@@ -16,8 +16,11 @@ class InformesController {
 
     @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE', 'ROLE_VOCAL'])
     def index() {
-        def feriantes = feriantesAnuales()
-        render(view:"index", model:["ferianteList": feriantes])
+        def year = params.anyo ?: Calendar.instance.get(Calendar.YEAR).toString()
+        def ferianteList = Feriante.findAllByAnyo(year, [sort: 'parcela'])
+        render(view:"index", model: [ferianteList: ferianteList,
+                                     anyos: FerianteController.obtenerDistintosAnyos(),
+                                     year: year])
     }
 
     @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE', 'ROLE_VOCAL'])
@@ -58,7 +61,7 @@ class InformesController {
             }
             return
         }
-        redirect (view:"index")
+        redirect (view: "index")
     }
 
     def informes(params) {
@@ -129,12 +132,6 @@ class InformesController {
             docs.add(tmpFile)
         }
         return docs
-    }
-
-    def feriantesAnuales() {
-        // Comprobar si ya se han creado los feriantes de este año
-        def year = Calendar.instance.get(Calendar.YEAR).toString()
-        return Feriante.findAllByAnyo(year, [sort: 'parcela'])
     }
 
     def creaMappings(Feriante feriante, otros_datos) {

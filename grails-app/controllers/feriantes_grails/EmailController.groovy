@@ -68,7 +68,7 @@ class EmailController {
                 template = template.replaceAll("«Vivienda»", toDecimalString(feriante.getVivienda()))
                 template = template.replaceAll("«Maquinas»", toDecimalString(feriante.getMaquinas()))
                 template = template.replaceAll("«Deuda»", toDecimalString(feriante.getDeuda()))
-                template = template.replaceAll("«Sanciones»", toDecimalString(feriante.getFianza()))
+                template = template.replaceAll("«Sanciones»", toDecimalString(feriante.getSancion()))
                 template = template.replaceAll("«MotivoSanciones»", feriante.motivoSancion ?: "")
                 sendMail {
                     to feriante.email

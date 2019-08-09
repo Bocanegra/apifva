@@ -34,7 +34,6 @@ class EmailController {
 
     @Secured(['ROLE_ADMIN', 'ROLE_SECRETARIO', 'ROLE_PRESIDENTE', 'ROLE_VOCAL'])
     def sendEmails() {
-        String template = params.template
         def ids_feriantes = (params.feriantes instanceof String) ? [params.feriantes] : params.feriantes
         def bodyHtml = params.bodyHtml ?: false
         def justificantePago = params.justificantePago ?: false
@@ -51,6 +50,7 @@ class EmailController {
         // Se envía un mail a cada feriante con sus datos
         ids_feriantes.each { f_id ->
             Feriante feriante = Feriante.get(f_id)
+            String template = params.template
             try {
                 // Reemplazar huecos en la plantilla por datos del feriante
                 template = template.replaceAll("«Anyo»", year)

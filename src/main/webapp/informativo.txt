@@ -1,40 +1,44 @@
-FERIA VIRGEN DE SAN LORENZO «Anyo» VALLADOLID
+<p><span style="font-size:14px"><span style="font-family:Courier New,Courier,monospace">FERIA VIRGEN DE SAN LORENZO -Anyo- VALLADOLID </span></span></p>
 
-DOCUMENTO DE PAGO
+<p><span style="font-size:14px"><span style="font-family:Courier New,Courier,monospace"><strong>DOCUMENTO DE PAGO </strong></span></span></p>
 
-Este año el pago del sitio para las ferias Virgen de San Lorenzo «Anyo» de Valladolid, se hará mediante transferencia bancaria y en tres pagos abajo indicados:
+<p><span style="font-size:14px"><span style="font-family:Courier New,Courier,monospace">Este a&ntilde;o el pago del sitio para las ferias Vírgen de San Lorenzo -Anyo- de Valladolid, se har&aacute; mediante transferencia bancaria y en tres pagos abajo indicados: </span></span></p>
 
-Ordenante: «Nombre»
-Parcela nº «Parcela» de «Sup_1» + «Sup_2» metros
+<p><span style="font-size:14px"><span style="font-family:Courier New,Courier,monospace">Ordenante: -Nombre-<br />
+Parcela n&ordm; -Parcela- de -Sup_1- + -Sup_2- metros </span></span></p>
 
-- Beneficiario: ASOCIACIÓN PROV. IND FERIANTES DE VALLADOLID - CIF.: G-47031521
-- Cuenta Corriente (IBAN): ES84-0182-4641-1700-0017-0375 (BBVA)
-- Total Euros: «Total» €
-- Primer pago, antes del ***FECHA DEL PRIMER PAGO*** de «Anyo»: «Pago1» €
-- Segundo pago, antes del ***FECHA DEL SEGUNDO PAGO*** de «Anyo»: «Pago2» €
-- Fianza antes del ***FECHA DE LA FIANZA*** de «Anyo»: «Fianza» €
+<ul>
+	<li><span style="font-size:14px"><span style="font-family:Courier New,Courier,monospace">Beneficiario: ASOCIACI&Oacute;N PROV. IND FERIANTES DE VALLADOLID - CIF.: G-47031521 </span></span></li>
+	<li><span style="font-size:14px"><span style="font-family:Courier New,Courier,monospace">Cuenta Corriente (IBAN): ES84-0182-4641-1700-0017-0375 (BBVA) </span></span></li>
+	<li><span style="font-size:14px"><span style="font-family:Courier New,Courier,monospace">Total Euros: -Total- &euro; </span></span></li>
+	<li><span style="font-size:14px"><span style="font-family:Courier New,Courier,monospace">Primer pago, antes del ***FECHA DEL PRIMER PAGO*** de -Anyo-: -Pago1- &euro; </span></span></li>
+	<li><span style="font-size:14px"><span style="font-family:Courier New,Courier,monospace">Segundo pago, antes del ***FECHA DEL SEGUNDO PAGO*** de -Anyo-: -Pago2- &euro; </span></span></li>
+	<li><span style="font-size:14px"><span style="font-family:Courier New,Courier,monospace">Fianza antes del ***FECHA DE LA FIANZA*** de -Anyo-: -Fianza- &euro; </span></span></li>
+</ul>
 
-Si los ingresos no se hacen antes de las fechas indicadas, se interpretará que renuncia al sitio y al reparto de Valladolid.
+<p><span style="font-size:14px"><span style="font-family:Courier New,Courier,monospace">Si los ingresos no se hacen antes de las fechas indicadas, se interpretar&aacute; que renuncia al sitio y al reparto de Valladolid. </span></span></p>
 
-1º Indicar en la transferencia el nº de parcela.
-2º Se exigirá enviar firmado por el titular la aceptación del pliego de condiciones.
+<p><span style="font-size:14px"><span style="font-family:Courier New,Courier,monospace">1&ordm; Indicar en la transferencia el n&ordm; de parcela.<br />
+2&ordm; Se exigir&aacute; enviar firmado por el titular la aceptaci&oacute;n del pliego de condiciones. </span></span></p>
 
-Debe también enviarse la documentación compulsada a la gestoría que se indica en la página web: (www.apifva.es) de la asociación para entregar al Ayuntamiento de Valladolid, documentación antes del ***FECHA PRESENTACIÓN DOCUMENTACIÓN*** de «Anyo», la siguiente documentación compulsada:
+<p><span style="font-size:14px"><span style="font-family:Courier New,Courier,monospace">Debe tambi&eacute;n enviarse la documentaci&oacute;n compulsada a la gestor&iacute;a que se indica en la p&aacute;gina web: (www.apifva.es) de la asociaci&oacute;n para entregar al Ayuntamiento de Valladolid, documentaci&oacute;n antes del ***FECHA PRESENTACI&Oacute;N DOCUMENTACI&Oacute;N*** de -Anyo-, la siguiente documentaci&oacute;n compulsada: </span></span></p>
 
-    * D.N.I. o documento equivalente COMPULSADO.
-    * Patente o Impuesto de Actividades Económicas COMPULSADO.
-    * Recibo de Autónomos, mes de junio «Anyo» COMPULSADO.
-    * Certificado de Hacienda COMPULSADO.
-    * Recibo del Seguro de Responsabilidad Civil póliza del seguro COMPULSADO.
-    * Certificado de la Seguridad Social COMPULSADO.
-    * Certificado anual de verificación y prueba COMPULSADO.
-    * Autorización Sanitaria de Funcionamiento COMPULSADO.
-    * Certificado de revisión de extintores COMPULSADO.
-    * Solicitud de tipo de negocio con metraje y fotografía.
-    * Boletín de la luz COMPULSADO.
-    * Para las máquinas se enviará boletín de la luz y seguro de R.C. COMPULSADO.
-    * La Conformidad al Pliego de Condiciones deberá entregarla firmada. No se admitirá ninguna documentación sin este requisito.
-    * Boletín para caravanas (obligatorio este año).
-    * Antes del 24 de septiembre deberán tener entregados los tickets de invitación. Se abonarán con las fianzas, si no, se perderán.
+<ul>
+	<li><span style="font-size:14px"><span style="font-family:Courier New,Courier,monospace">D.N.I. o documento equivalente COMPULSADO. </span></span></li>
+	<li><span style="font-size:14px"><span style="font-family:Courier New,Courier,monospace">Patente o Impuesto de Actividades Econ&oacute;micas COMPULSADO. </span></span></li>
+	<li><span style="font-size:14px"><span style="font-family:Courier New,Courier,monospace">Recibo de Aut&oacute;nomos, mes de junio &laquo;Anyo&raquo; COMPULSADO. </span></span></li>
+	<li><span style="font-size:14px"><span style="font-family:Courier New,Courier,monospace">Certificado de Hacienda COMPULSADO. </span></span></li>
+	<li><span style="font-size:14px"><span style="font-family:Courier New,Courier,monospace">Recibo del Seguro de Responsabilidad Civil p&oacute;liza del seguro COMPULSADO. </span></span></li>
+	<li><span style="font-size:14px"><span style="font-family:Courier New,Courier,monospace">Certificado de la Seguridad Social COMPULSADO. </span></span></li>
+	<li><span style="font-size:14px"><span style="font-family:Courier New,Courier,monospace">Certificado anual de verificaci&oacute;n y prueba COMPULSADO. </span></span></li>
+	<li><span style="font-size:14px"><span style="font-family:Courier New,Courier,monospace">Autorizaci&oacute;n Sanitaria de Funcionamiento COMPULSADO. </span></span></li>
+	<li><span style="font-size:14px"><span style="font-family:Courier New,Courier,monospace">Certificado de revisi&oacute;n de extintores COMPULSADO. </span></span></li>
+	<li><span style="font-size:14px"><span style="font-family:Courier New,Courier,monospace">Solicitud de tipo de negocio con metraje y fotograf&iacute;a. </span></span></li>
+	<li><span style="font-size:14px"><span style="font-family:Courier New,Courier,monospace">Bolet&iacute;n de la luz COMPULSADO. </span></span></li>
+	<li><span style="font-size:14px"><span style="font-family:Courier New,Courier,monospace">Para las m&aacute;quinas se enviar&aacute; bolet&iacute;n de la luz y seguro de R.C. COMPULSADO. </span></span></li>
+	<li><span style="font-size:14px"><span style="font-family:Courier New,Courier,monospace">La Conformidad al Pliego de Condiciones deber&aacute; entregarla firmada. No se admitir&aacute; ninguna documentaci&oacute;n sin este requisito. </span></span></li>
+	<li><span style="font-size:14px"><span style="font-family:Courier New,Courier,monospace">Bolet&iacute;n para caravanas (obligatorio este a&ntilde;o). </span></span></li>
+	<li><span style="font-size:14px"><span style="font-family:Courier New,Courier,monospace">Antes del 24 de septiembre deber&aacute;n tener entregados los tickets de invitaci&oacute;n. Se abonar&aacute;n con las fianzas, si no, se perder&aacute;n. </span></span></li>
+</ul>
 
-INDISPENSABLE JUSTIFICANTE DE PAGO PARA PODER ENTRAR EN LA FERIA
+<p><span style="font-size:14px"><span style="font-family:Courier New,Courier,monospace"><strong>INDISPENSABLE JUSTIFICANTE DE PAGO PARA PODER ENTRAR EN LA FERIA</strong></span></span></p>

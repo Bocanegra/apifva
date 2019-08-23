@@ -13,6 +13,7 @@
             $("input[type='checkbox']").prop("checked", false);
         }
     </g:javascript>
+    <script src="//cdn.ckeditor.com/4.6.0/full-all/ckeditor.js"></script>
 </head>
 
 <body>
@@ -24,7 +25,7 @@
     <section class="row colset-2-its">
         <h1>Documento informativo, año <b>${Calendar.instance.get(Calendar.YEAR)}</b></h1>
         <p>Revisa la plantilla con el texto a enviar, y selecciona todos los usuarios a los que quieras enviar el email.</p>
-        <p>Los campos entre «...» se rellenan automáticamente. Pulsa "Enviar" cuando esté todo correcto.</p>
+        <p>Los campos entre -...- se rellenan automáticamente. Pulsa "Enviar" cuando esté todo correcto.</p>
         <p><b>OJO A LOS CAMPOS DE FECHAS DE PAGO, HAY QUE RELLENAR TODOS LOS ***FECHA ...***</b></p>
         </p>
 
@@ -38,6 +39,7 @@
                 <g:textField name="titulo" value="Ferias Vírgen de San Lorenzo Valladolid ${Calendar.instance.get(Calendar.YEAR)} - documento informativo" class="email_table"/>
                 <h2>Mensaje</h2>
                 <g:textArea name="template" value="${template}" rows="45" class="email_table"/>
+                <g:hiddenField name="bodyHtml" value="true"/>
                 <br/>
 
                 <h1 align="center">
@@ -80,6 +82,13 @@
 
     </section>
 </div>
+
+<script>
+    CKEDITOR.replace('template', {
+        extraPlugins: 'codesnippet',
+        height: ['500px']
+    });
+</script>
 
 </body>
 </html>

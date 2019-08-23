@@ -5,6 +5,7 @@
     <meta name="layout" content="main"/>
     <title>Asociación de Feriantes de Valladolid</title>
     <asset:link rel="icon" href="favicon.ico" type="image/x-ico"/>
+    <script src="//cdn.ckeditor.com/4.6.0/full-all/ckeditor.js"></script>
 </head>
 
 <body>
@@ -16,7 +17,7 @@
         <section class="row colset-2-its">
             <h1>Justificante de pago, año <b>${Calendar.instance.get(Calendar.YEAR)}</b></h1>
             <p>Revisa la plantilla con el texto a enviar, y selecciona todos los usuarios a los que quieras enviar el email.</p>
-            <p>Los campos entre «...» se rellenan automáticamente. Pulsa "Enviar" cuando esté todo correcto.</p>
+            <p>Los campos entre -...- se rellenan automáticamente. Pulsa "Enviar" cuando esté todo correcto.</p>
         </p>
 
             <g:if test="${flash.message}">
@@ -31,6 +32,7 @@
                     <g:textArea id="template" name="template" value="${template}" rows="20" class="email_table"/>
                     <br/>
                     <g:hiddenField name="justificantePago" value="true"/>
+                    <g:hiddenField name="bodyHtml" value="true"/>
 
                     <h1 align="center"><g:actionSubmit action="sendEmails" value="Enviar" class="email_buttons"/></h1>
                     <br/>
@@ -66,5 +68,13 @@
 
         </section>
     </div>
+
+    <script>
+        CKEDITOR.replace('template', {
+            extraPlugins: 'codesnippet',
+            height: ['450px']
+        });
+    </script>
+
 </body>
 </html>

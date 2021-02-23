@@ -80,7 +80,7 @@ class BarriosController {
             // Se añade la imagen
             def imageFile = request.getFile("plano")
             if (imageFile.filename && imageFile.filename != "") {
-                P image = newImage(wordMLPackage, imageFile.getBytes(), null, null, 0, 1);
+                image = newImage(wordMLPackage, imageFile.getBytes(), null, null, 0, 1);
                 wordMLPackage.getMainDocumentPart().addObject(image);
             }
             MailMerger.setMERGEFIELDInOutput(MailMerger.OutputField.KEEP_MERGEFIELD);

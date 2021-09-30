@@ -40,17 +40,14 @@ class EmailController {
         def justificantePago = params.justificantePago ?: false
         def year = Calendar.instance.get(Calendar.YEAR).toString()
         int emailsEnviados = 0
-        // Check de pagado si es el justificante de pago de un feriante (v1.5.1)
-        if (justificantePago) {
-            Feriante feriante = Feriante.get(ids_feriantes[0])
-            if (feriante != null) {
-                feriante.todoPagado = true
-                feriante.save()
-            }
-        }
         // Se envía un mail a cada feriante con sus datos
         ids_feriantes.each { f_id ->
             Feriante feriante = Feriante.get(f_id)
+            // Check de pagado si es el justificante de pago de un feriante (v1.5.1)
+            if (justificantePago && feriante != null) {
+                feriante.todoPagado = true
+                feriante.save()
+            }
             String template = params.template
             try {
                 // Reemplazar huecos en la plantilla por datos del feriante

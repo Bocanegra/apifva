@@ -109,9 +109,9 @@ endpoints:
 grails:
     mail:
         host: "smtp.gmail.com"
-        port: 465
+        port: 587
         username: "feriantesvalladolid.docs@gmail.com"
-        password: "Feria2020."
+        password: "rwgvdrxffibhmhhw"
         props:
             mail.smtp.auth: "true"
             mail.smtp.socketFactory.port: "465"

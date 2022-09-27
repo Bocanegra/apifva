@@ -29,7 +29,7 @@
                     <h2>Título</h2>
                     <g:textField name="titulo" value="Ferias Vírgen de San Lorenzo Valladolid ${Calendar.instance.get(Calendar.YEAR)} - justificante de pago" class="email_table"/>
                     <h2>Mensaje</h2>
-                    <g:textArea id="template" name="template" value="${template}" rows="20" class="email_table"/>
+                    <g:textArea id="template" name="template" value="${template}" rows="25" class="email_table"/>
                     <br/>
                     <g:hiddenField name="justificantePago" value="true"/>
                     <g:hiddenField name="bodyHtml" value="true"/>
